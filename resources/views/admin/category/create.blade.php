@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('admin-title', 'New Role')
+@section('admin-title', 'New Category')
 
 @section('admin-content')
 <div class="row">
@@ -9,16 +9,16 @@
 			<div class="pannel-wrapper collapse in">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<h3>Roles</h3>
+						<h3>Categories</h3>
 						<ol class="breadcrumb pull-left">
 							<li><a href="{{ route('home') }}">Dashboard</a></li>
-							<li><a href="{{ route('role.index') }}">Roles</a></li>
+							<li><a href="{{ route('category.index') }}">Categories</a></li>
 							<li class="active"><span>Create</span></li>
 						</ol>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						@if(auth::user()->can('View_Role'))
-						<a href="{{ route('role.index') }}" type="button" class="btn btn-danger btn-rounded pull-right"><i class="ti ti-list"></i>&nbsp;&nbsp;&nbsp;View All</a>
+						@if(auth::user()->can('View_Category'))
+						<a href="{{ route('category.index') }}" type="button" class="btn btn-danger btn-rounded pull-right"><i class="ti ti-list"></i>&nbsp;&nbsp;&nbsp;View All</a>
 						@endif
 					</div>
 				</div>
@@ -35,19 +35,27 @@
 			<div class="panel panel-default card-view">
 				<div class="panel-heading">
 					<div class="pull-left">
-						<h6 class="panel-title txt-dark">New Role</h6>
+						<h6 class="panel-title txt-dark">New Category</h6>
 					</div>
 					<div class="clearfix"></div>
 				</div>
 				<div class="panel-wrapper collapse in">
 					<div class="panel-body">
 						<div class="form-wrap">
-							<form action="{{ route('role.store') }}" method="POST">
+							<form action="{{ route('category.store') }}" method="POST" enctype="multipart/form-data">
 								@csrf
 								<div class="row">
+									<div class="form-group col-md-6">
+										<label class="control-label mb-10 text-left">Title</label>
+										<input type="text" name="title" value="{{ old('title') }}" class="form-control" placeholder="Title" required />
+									</div>
+									<div class="form-group col-md-6">
+										<label class="control-label md-10 text-left">Thumbnail</label>
+										<input type="file" name="thumbnail" class="form-control" required accept="image/*" />
+									</div>
 									<div class="form-group col-md-12">
-										<label class="control-label mb-10 text-left">Role Name</label>
-										<input type="text" name="name" class="form-control" placeholder="Role Name" value="{{ old('name') }}" required />
+										<label class="control-label mb-10 text-left">Description</label>
+										<textarea rows="10" class="form-control" name="description" placeholder="Category Description">{{ old('description') }}</textarea>
 									</div>
 								</div>
 								<input type="submit" value="Save" class="btn btn-success pull-right">
@@ -55,7 +63,7 @@
 						</div>
 					</div>
 				</div>
-			</div><!-- /.panel -->
+			</div>
 		</div>
 	</div>
 </section>

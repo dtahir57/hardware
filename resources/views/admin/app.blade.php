@@ -13,7 +13,7 @@
 	<!-- Favicon -->
 	<link rel="shortcut icon" href="favicon.ico">
 	<link rel="icon" href="favicon.ico" type="image/x-icon">
-	
+	<link href="{{ asset('bower_components/select2/dist/css/select2.min.css')}}" rel="stylesheet" type="text/css"/>
 	<!-- Data table CSS -->
 	<link href="{{ asset('bower_components/datatables/media/css/jquery.dataTables.min.css')}}" rel="stylesheet" type="text/css"/>
 	
@@ -29,6 +29,8 @@
 	
 	<!-- vector map CSS -->
 	<link href="{{ asset('vectormap/jquery-jvectormap-2.0.2.css')}}" rel="stylesheet" type="text/css"/>
+
+	<link rel="stylesheet" type="text/css" href="{{ asset('bower_components/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}">
 	
 	<!-- Custom CSS -->
 	<link href="{{ asset('dist/css/style.css')}}" rel="stylesheet" type="text/css">
@@ -40,7 +42,7 @@
 		<div class="la-anim-1"></div>
 	</div>
 	<!-- /Preloader -->
-    <div class="wrapper theme-1-active navbar-top-light">
+    <div class="wrapper theme-1-active navbar-top-light" id="app">
 		<!-- Top Menu Items -->
 		<nav class="navbar navbar-inverse navbar-fixed-top">
 			<div class="mobile-only-brand pull-left">
@@ -341,8 +343,63 @@
 					<hr/>
 				</li>
 				<li>
-					<a class="{{(Request::is('home')? 'active': '')}}" href="{{ route('home') }}"><div class="pull-left"><i class="ti-dashboard  mr-20"></i><span class="right-nav-text">Analytical</span></div><div class="clearfix"></div></a>
+					<a class="{{(Request::is('home')? 'active': '')}}" href="{{ route('home') }}">
+						<div class="pull-left">
+							<i class="ti-dashboard  mr-20"></i>
+							<span class="right-nav-text">Analytical</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
 				</li>
+				@if(auth::user()->can('View_Category'))
+				<li>
+					<a class="{{(Request::is('admin/categories')? 'active': '')}}
+							  {{(Request::is('admin/categories/create')? 'active': '')}}
+							  {{(Request::is('admin/categories/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('category.index') }}">
+						<div class="pull-left">
+							<i class="ti-tag  mr-20"></i>
+							<span class="right-nav-text">Categories</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Product'))
+				<li>
+					<a class="{{(Request::is('admin/products')? 'active': '')}}
+							  {{(Request::is('admin/products/create')? 'active': '')}}" href="{{ route('product.index') }}">
+						<div class="pull-left">
+							<i class="ti-package  mr-20"></i>
+							<span class="right-nav-text">Products</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Manufacturer'))
+				<li>
+					<a class="{{(Request::is('admin/manufacturers')? 'active': '')}}
+							  {{(Request::is('admin/manufacturers/create')? 'active': '')}}
+							  {{(Request::is('admin/manufacturers/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('manufacturer.index') }}">
+						<div class="pull-left">
+							<i class="ti-ruler-pencil mr-20"></i>
+							<span class="right-nav-text">Manufacturers</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Attribute'))
+				<li>
+					<a class="{{(Request::is('admin/attributes')? 'active': '')}}" href="{{ route('attribute.index') }}">
+						<div class="pull-left">
+							<i class="ti-panel mr-20"></i>
+							<span class="right-nav-text">Attributes</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
 				<li>
 					<a class="{{ (Request::is('admin/permissions')? 'active': '') }}
 							  {{ (Request::is('admin/permissions/create')? 'active': '') }}
@@ -875,6 +932,7 @@
 	
 	<!-- Bootstrap Select JavaScript -->
 	<script src="{{ asset('bower_components/bootstrap-select/dist/js/bootstrap-select.min.js')}}"></script>
+	<script src="{{ asset('bower_components/select2/dist/js/select2.full.min.js')}}"></script>
 	
 	<!-- Flot Charts JavaScript -->
 	<script src="{{ asset('bower_components/Flot/excanvas.min.js')}}"></script>
@@ -890,6 +948,7 @@
 	<!-- Init JavaScript -->
 	<script src="{{ asset('dist/js/init.js')}}"></script>
 	<script src="{{ asset('dist/js/dashboard2-data.js')}}"></script>
+	@yield('script')
 </body>
 
 </html>

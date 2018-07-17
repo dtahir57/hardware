@@ -51,6 +51,17 @@
 										<input type="text" name="name" class="form-control" placeholder="Role Name" value="{{ $role->name }}" required />
 									</div>
 								</div>
+								<br>
+								<h4>Assigned Permissions to {{ $role->name }}</h4>
+								<br>
+								@foreach($permissions as $permission)
+								<div class="col-md-3">
+									<div class="checkbox checkbox-success">
+										<input id="checkbox4" type="checkbox" name="permissions[]" value="{{ $permission->name }}" @if ($role->hasPermissionTo($permission)) checked @endif>
+										<label for="checkbox4"> {{ $permission->name }}</label>
+									</div>
+								</div>
+								@endforeach
 								<input type="submit" value="Save" class="btn btn-success pull-right">
 							</form>
 						</div>

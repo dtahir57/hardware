@@ -1,16 +1,14 @@
 <?php
 
-namespace Hardware\Http\Controllers\UserManagement;
+namespace Hardware\Http\Controllers\Settings;
 
 use Illuminate\Http\Request;
 use Hardware\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use Hardware\User;
-use Auth;
+use Hardware\Http\Models\Manufacturer;
+use Hardware\Http\Requests\ManufacturerRequest;
 use Session;
-use Hardware\Http\Requests\UserRequest;
 
-class UserController extends Controller
+class ManufacturerController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +17,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->get();
-        return view('admin.UserManagement.user.index', compact('users'));
+        $manufacturers = Manufacturer::latest()->get();
+        return view('admin.manufacturer.index', compact('manufacturers'));
     }
 
     /**
@@ -30,8 +28,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('admin.UserManagement.user.create', compact('roles'));
+        return view('admin.manufacturer.create');
     }
 
     /**
@@ -40,17 +37,23 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(ManufacturerRequest $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-        $user->assignRole($request->role);
-        if ($user) {
-            Session::flash('created', 'New User Created Successfully');
-            return redirect()->route('user.index');
+        $manufacturer = new Manufacturer;
+        $manufacturer->name = $request->name;
+        $manufacturer->slug = str_slug($request->name, '_');
+        if ($request->hasFile('image')) {
+            $manufacturer->image = $request->image->store('public/manufacturer');
+        }
+        if ($request->is_active) {
+            $manufacturer->is_active = 1;
+        } else {
+            $manufacturer->is_active = 0;
+        }
+        $manufacturer->save();
+        if ($manufacturer) {
+            Session::flash('created', 'New Manufacturer Added Successfully');
+            return redirect()->route('manufacturer.index');
         }
     }
 

@@ -1,16 +1,13 @@
 <?php
 
-namespace Hardware\Http\Controllers\UserManagement;
+namespace Hardware\Http\Controllers\Settings;
 
 use Illuminate\Http\Request;
 use Hardware\Http\Controllers\Controller;
-use Spatie\Permission\Models\Role;
-use Hardware\User;
-use Auth;
-use Session;
-use Hardware\Http\Requests\UserRequest;
+use Hardware\Http\Models\Product;
+use Hardware\Http\Models\Category;
 
-class UserController extends Controller
+class ProductController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,8 +16,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::with('roles')->get();
-        return view('admin.UserManagement.user.index', compact('users'));
+        return view('admin.product.index');
     }
 
     /**
@@ -30,8 +26,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        $roles = Role::all();
-        return view('admin.UserManagement.user.create', compact('roles'));
+        $categories = Category::all();
+        return view('admin.product.create', compact('categories'));
     }
 
     /**
@@ -40,18 +36,9 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(UserRequest $request)
+    public function store(Request $request)
     {
-        $user = new User;
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = bcrypt($request->password);
-        $user->save();
-        $user->assignRole($request->role);
-        if ($user) {
-            Session::flash('created', 'New User Created Successfully');
-            return redirect()->route('user.index');
-        }
+        //
     }
 
     /**

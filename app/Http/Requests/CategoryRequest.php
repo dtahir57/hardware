@@ -4,7 +4,7 @@ namespace Hardware\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRequest extends FormRequest
+class CategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -33,20 +33,18 @@ class UserRequest extends FormRequest
             case 'POST':
                 {
                     return [
-                            'name' => 'required|max:255',
-                            'email' => 'required|max:255|unique:users',
-                            'password' => 'required|max:255|confirmed',
-                            'role' => 'required'
+                            'title' => 'required|max:255|unique:categories',
+                            'description' => 'required',
+                            'thumbnail' => 'required|image'
                         ];
                 }
             case 'PUT':
             case 'PATCH':
                 {
                     return [
-                        'name' => 'required|max:255',
-                        'email' => 'required|max:255',
-                        'password' => 'required|max:255|confirmed',
-                        'role' => 'required'
+                        'title' => 'required|max:255',
+                        'description' => 'required',
+                        'thumbnail' => 'required|image'
                     ];
                 }
             default:

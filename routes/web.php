@@ -80,6 +80,75 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 		Route::get('users/destroy/{id}', 'UserManagement\UserController@destroy')->name('user.destroy');
 	});
 	/**
-	 * Endinf Routes For UserController
+	 * Ending Routes For UserController
+	 */
+	
+	/**
+	 * Starting Routes For CategoryController
+	 */
+	Route::group(['middleware' => ['permission:View_Category']], function () {
+		Route::get('categories', 'Settings\CategoryController@index')->name('category.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Category']], function () {
+		Route::get('categories/create', 'Settings\CategoryController@create')->name('category.create');
+		Route::post('categories', 'Settings\CategoryController@store')->name('category.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Category']], function () {
+		Route::get('categories/{id}/edit', 'Settings\CategoryController@edit')->name('category.edit');
+		Route::patch('categories/{id}', 'Settings\CategoryController@update')->name('category.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Category']], function () {
+		Route::get('categories/destroy/{id}', 'Settings\CategoryController@destroy')->name('category.destroy');
+	});
+	Route::group(['middleware' => ['permission:Feature_Category']], function () {
+		Route::post('categories/feature', 'Settings\CategoryController@feature')->name('category.feature');
+	});
+	/**
+	 * Ending Routes For CategoryController
+	 */
+	
+	/**
+	 * Starting Routes For ManufacturerController
+	 */
+	Route::group(['middleware' => ['permission:View_Manufacturer']], function () {
+		Route::get('manufacturers', 'Settings\ManufacturerController@index')->name('manufacturer.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Manufacturer']], function () {
+		Route::get('manufacturer/create', 'Settings\ManufacturerController@create')->name('manufacturer.create');
+		Route::post('manufacturers', 'Settings\ManufacturerController@store')->name('manufacturer.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Manufacturer']], function () {
+		Route::get('manufacturers/{id}/edit', 'Settings\ManufacturerController@edit')->name('manufacturer.edit');
+		Route::patch('manufacturers/{id}', 'Settings\ManufacturerController@update')->name('manufacturer.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Manufacturer']], function () {
+		Route::get('manufacturers/destroy/{id}', 'Settings\ManufacturerController@destroy')->name('manufacturer.destroy'); 
+	});
+	/**
+	 * Ending Routes For ManufacturerController
+	 */
+	
+	/**
+	 * Starting Routes For AttributeController
+	 */
+	Route::group(['middleware' => ['permission:View_Attribute']], function () {
+		Route::get('attributes', 'Settings\AttributeController@index')->name('attribute.index');
+	});
+	/**
+	 * Ending Routes For AttributeController
+	 */
+
+	/**
+	 * Starting Routes For ProductController
+	 */
+	Route::group(['middleware' => ['permission:View_Product']], function () {
+		Route::get('products', 'Settings\ProductController@index')->name('product.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Product']], function () {
+		Route::get('products/create', 'Settings\ProductController@create')->name('product.create');
+		Route::post('products', 'Settings\ProductController@store')->name('product.store');
+	});
+	/**
+	 * Ending Routes For ProductController
 	 */
 });

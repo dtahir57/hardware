@@ -26,5 +26,21 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'user', 'name' => 'Add_User']);
         Permission::create(['module' => 'user', 'name' => 'Edit_User']);
         Permission::create(['module' => 'user', 'name' => 'Delete_User']);
+
+        Permission::create(['module' => 'category', 'name' => 'View_Category']);
+        Permission::create(['module' => 'category', 'name' => 'Add_Category']);
+        Permission::create(['module' => 'category', 'name' => 'Edit_Category']);
+        Permission::create(['module' => 'category', 'name' => 'Delete_Category']);
+        Permission::create(['module' => 'category', 'name' => 'Feature_Category']);
+
+        Permission::create(['module' => 'manufacturer', 'name' => 'View_Manufacturer']);
+        Permission::create(['module' => 'manufacturer', 'name' => 'Add_Manufacturer']);
+        Permission::create(['module' => 'manufacturer', 'name' => 'Edit_Manufacturer']);
+        Permission::create(['module' => 'manufacturer', 'name' => 'Delete_Manufacturer']);
+
+        Permission::create(['module' => 'attribute', 'name' => 'View_Attribute']);
+        Permission::create(['module' => 'attribute', 'name' => 'Add_Attribute']);
+        Permission::create(['module' => 'attribute', 'name' => 'Edit_Attribute']);
+        Permission::create(['module' => 'attribute', 'name' => 'Delete_Attribute']);
     }
 }
