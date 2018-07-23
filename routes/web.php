@@ -134,8 +134,82 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	Route::group(['middleware' => ['permission:View_Attribute']], function () {
 		Route::get('attributes', 'Settings\AttributeController@index')->name('attribute.index');
 	});
+	Route::group(['middleware' => ['permission:Add_Attribute']], function () {
+		Route::get('attributes/create', 'Settings\AttributeController@create')->name('attribute.create');
+		Route::post('attributes', 'Settings\AttributeController@store')->name('attribute.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Attribute']], function () {
+		Route::get('attributes/{id}/edit', 'Settings\AttributeController@edit')->name('attribute.edit');
+		Route::patch('attributes/{id}', 'Settings\AttributeController@update')->name('attribute.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Attribute']], function () {
+		Route::get('attributes/destroy/{id}', 'Settings\AttributeController@destroy')->name('attribute.destroy');
+	});
 	/**
 	 * Ending Routes For AttributeController
+	 */
+
+	/**
+	 * Starting Routes For TagController
+	 */
+	Route::group(['middleware' => ['permission:View_Tag']], function () {
+		Route::get('tags', 'Settings\TagController@index')->name('tag.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Tag']], function () {
+		Route::get('tags/create', 'Settings\TagController@create')->name('tag.create');
+		Route::post('tags', 'Settings\TagController@store')->name('tag.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Tag']], function () {
+		Route::get('tags/{id}/edit', 'Settings\TagController@edit')->name('tag.edit');
+		Route::patch('tags/{id}', 'Settings\TagController@update')->name('tag.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Tag']], function () {
+		Route::get('tags/destroy/{id}', 'Settings\TagController@destroy')->name('tag.destroy');
+	});
+	/**
+	 * Ending Routes For TagController
+	 */
+	
+	/**
+	 * Starting Routes For BadgeController
+	 */
+	Route::group(['middleware' => ['permission:View_Badge']], function () {
+		Route::get('badges', 'Settings\BadgeController@index')->name('badge.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Badge']], function () {
+		Route::get('badges/create', 'Settings\BadgeController@create')->name('badge.create');
+		Route::post('badges', 'Settings\BadgeController@store')->name('badge.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Badge']], function () {
+		Route::get('badges/{id}/edit', 'Settings\BadgeController@edit')->name('badge.edit');
+		Route::patch('badges/{id}', 'Settings\BadgeController@update')->name('badge.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Badge']], function () {
+		Route::get('badges/destroy/{id}', 'Settings\BadgeController@destroy')->name('badge.destroy');
+	});
+	/**
+	 * Ending Routes For BadgeController
+	 */
+	
+	/**
+	 * Starting Routes For UnitController
+	 */
+	Route::group(['middleware' => ['permission:View_Unit']], function () {
+		Route::get('units', 'Settings\UnitController@index')->name('unit.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Unit']], function () {
+		Route::get('units/create', 'Settings\UnitController@create')->name('unit.create');
+		Route::post('units', 'Settings\UnitController@store')->name('unit.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Unit']], function () {
+		Route::get('units/{id}/edit', 'Settings\UnitController@edit')->name('unit.edit');
+		Route::patch('units/{id}', 'Settings\UnitController@update')->name('unit.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Unit']], function () {
+		Route::get('units/destroy/{id}', 'Settings\UnitController@destroy')->name('unit.destroy');
+	});
+	/**
+	 * Ending Routes For UnitController
 	 */
 
 	/**

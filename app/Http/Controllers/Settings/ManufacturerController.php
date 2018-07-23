@@ -7,6 +7,7 @@ use Hardware\Http\Controllers\Controller;
 use Hardware\Http\Models\Manufacturer;
 use Hardware\Http\Requests\ManufacturerRequest;
 use Session;
+use File;
 
 class ManufacturerController extends Controller
 {
@@ -76,7 +77,8 @@ class ManufacturerController extends Controller
      */
     public function edit($id)
     {
-        //
+        $manufacturer = Manufacturer::findOrFail($id);
+        return view('admin.manufacturer.edit', compact('manufacturer'));
     }
 
     /**
@@ -88,7 +90,23 @@ class ManufacturerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $manufacturer = Manufacturer::findOrFail($id);
+        $manufacturer->name = $request->name;
+        $manufacturer->slug = str_slug($request->name, '_');
+        if ($request->hasFile('image')) {
+            File::delete($manufacturer->image);
+            $manufacturer->image = $request->image->store('public/manufacturer');
+        }
+        if ($request->is_active) {
+            $manufacturer->is_active = 1;
+        } else {
+            $manufacturer->is_active = 0;
+        }
+        $manufacturer->save();
+        if ($manufacturer) {
+            Session::flash('updated', 'Manufacturer Updated Successfully');
+            return redirect()->route('manufacturer.index');
+        }
     }
 
     /**
@@ -99,6 +117,12 @@ class ManufacturerController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $manufacturer = Manufacturer::findOrFail($id);
+        File::delete($manufacturer->image);
+        $manufacturer->delete();
+        if ($manufacturer) {
+            Session::flash('deleted', 'Manufacturer Deleted Successfully');
+            return redirect()->route('manufacturer.index');
+        }
     }
 }

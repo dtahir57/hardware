@@ -1,6 +1,6 @@
 @extends('admin.app')
 
-@section('admin-title', 'Permission')
+@section('admin-title', 'Tags')
 
 @section('admin-content')
 <div class="row">
@@ -9,15 +9,15 @@
 			<div class="pannel-wrapper collapse in">
 				<div class="row">
 					<div class="col-md-6 col-sm-6">
-						<h3>Permissions</h3>
+						<h3>Tags</h3>
 						<ol class="breadcrumb pull-left">
 							<li><a href="{{ route('home') }}">Dashboard</a></li>
-							<li class="active"><span>Permissions</span></li>
+							<li class="active"><span>Tags</span></li>
 						</ol>
 					</div>
 					<div class="col-md-6 col-sm-6">
-						@if(auth::user()->can('Add_Permission'))
-						<a href="{{ route('permission.create') }}" type="button" class="btn btn-danger btn-rounded pull-right"><i class="ti ti-plus"></i>&nbsp;&nbsp;&nbsp;Permission</a>
+						@if(auth::user()->can('Add_Tag'))
+						<a href="{{ route('tag.create') }}" type="button" class="btn btn-danger btn-rounded pull-right"><i class="ti ti-plus"></i>&nbsp;&nbsp;&nbsp;Tag</a>
 						@endif
 					</div>
 				</div>
@@ -44,27 +44,35 @@
 							<table id="datable_1" class="table table-hover display  pb-30" >
 								<thead>
 									<tr>
-										<th style="width: 30px;">#</th>
-										<th>Module</th>
+										<th style="width: 20px;">#</th>
 										<th>Name</th>
-										@if(auth::user()->can('Edit_Permission') || auth::user()->can('Delete_Permission'))
+										<th>Slug</th>
+										<th style="width: 60px;">Active</th>
+										@if(auth::user()->can('Edit_Tag') || auth::user()->can('Delete_Tag'))
 										<th style="width: 300px;">Action</th>
 										@endif
 									</tr>
 								</thead>
 								<tbody>
-									@foreach($permissions as $permission)
+									@foreach($tags as $tag)
 									<tr>
 										<td>{{ $loop->index + 1 }}</td>
-										<td>{{ $permission->module }}</td>
-										<td>{{ $permission->name }}</td>
-										@if(auth::user()->can('Edit_Permission') || auth::user()->can('Delete_Permission'))
+										<td>{{ $tag->name }}</td>
+										<td><span class="badge badge-info">{{ $tag->slug }}</span></td>
 										<td>
-											@if(auth::user()->can('Edit_Permission'))
-											<a href="{{ route('permission.edit', $permission->id) }}" type="button" class="btn btn-primary btn-outline btn-sm btn-rounded"><i class="ti-pencil"></i>&nbsp;&nbsp;&nbsp;Edit</a>
+											@if($tag->is_active)
+											<span class="badge badge-success">YES</span>
+											@else
+											<span class="badge badge-danger">NO</span>
 											@endif
-											@if(auth::user()->can('Delete_Permission'))
-											<a href="{{ route('permission.destroy', $permission->id) }}" type="button" class="btn btn-danger btn-outline btn-sm btn-rounded"><i class="ti-trash"></i>&nbsp;&nbsp;&nbsp;Delete</a>
+										</td>
+										@if(auth::user()->can('Edit_Tag') || auth::user()->can('Delete_Tag'))
+										<td>
+											@if(auth::user()->can('Edit_Tag'))
+											<a href="{{ route('tag.edit', $tag->id) }}" type="button" class="btn btn-primary btn-outline btn-sm btn-rounded"><i class="ti-pencil"></i>&nbsp;&nbsp;&nbsp;Edit</a>
+											@endif
+											@if(auth::user()->can('Delete_Tag'))
+											<a href="{{ route('tag.destroy', $tag->id) }}" type="button" class="btn btn-danger btn-outline btn-sm btn-rounded"><i class="ti-trash"></i>&nbsp;&nbsp;&nbsp;Delete</a>
 											@endif
 										</td>
 										@endif

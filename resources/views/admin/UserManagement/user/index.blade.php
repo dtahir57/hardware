@@ -44,11 +44,11 @@
 							<table id="datable_1" class="table table-hover display  pb-30" >
 								<thead>
 									<tr>
-										<th>#</th>
+										<th style="width: 30px;">#</th>
 										<th>Name</th>
 										<th>Email</th>
 										@if(auth::user()->can('Edit_User') || auth::user()->can('Delete_User'))
-										<th>Action</th>
+										<th style="width: 300px;">Action</th>
 										@endif
 									</tr>
 								</thead>

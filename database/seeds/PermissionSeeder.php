@@ -42,5 +42,20 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'attribute', 'name' => 'Add_Attribute']);
         Permission::create(['module' => 'attribute', 'name' => 'Edit_Attribute']);
         Permission::create(['module' => 'attribute', 'name' => 'Delete_Attribute']);
+
+        Permission::create(['module' => 'tag', 'name' => 'View_Tag']);
+        Permission::create(['module' => 'tag', 'name' => 'Add_Tag']);
+        Permission::create(['module' => 'tag', 'name' => 'Edit_Tag']);
+        Permission::create(['module' => 'tag', 'name' => 'Delete_Tag']);
+
+        Permission::create(['module' => 'badge', 'name' => 'View_Badge']);
+        Permission::create(['module' => 'badge', 'name' => 'Add_Badge']);
+        Permission::create(['module' => 'badge', 'name' => 'Edit_Badge']);
+        Permission::create(['module' => 'badge', 'name' => 'Delete_Badge']);
+
+        Permission::create(['module' => 'unit', 'name' => 'View_Unit']);
+        Permission::create(['module' => 'unit', 'name' => 'Add_Unit']);
+        Permission::create(['module' => 'unit', 'name' => 'Edit_Unit']);
+        Permission::create(['module' => 'unit', 'name' => 'Delete_Unit']);
     }
 }

@@ -391,10 +391,51 @@
 				@endif
 				@if(auth::user()->can('View_Attribute'))
 				<li>
-					<a class="{{(Request::is('admin/attributes')? 'active': '')}}" href="{{ route('attribute.index') }}">
+					<a class="{{(Request::is('admin/attributes')? 'active': '')}}
+							  {{(Request::is('admin/attributes/create')? 'active': '')}}
+							  {{(Request::is('admin/attributes/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('attribute.index') }}">
 						<div class="pull-left">
 							<i class="ti-panel mr-20"></i>
 							<span class="right-nav-text">Attributes</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Tag'))
+				<li>
+					<a class="{{(Request::is('admin/tags')? 'active': '')}}
+							  {{(Request::is('admin/tags/create')? 'active': '')}}
+							  {{(Request::is('admin/tags/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('tag.index') }}">
+						<div class="pull-left">
+							<i class="ti-tag mr-20"></i>
+							<span class="right-nav-text">Tags</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Badge'))
+				<li>
+					<a class="{{(Request::is('admin/badges')? 'active': '')}}
+							  {{(Request::is('admin/badges/create')? 'active': '')}}
+							  {{(Request::is('admin/badges/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('badge.index') }}">
+						<div class="pull-left">
+							<i class="ti-medall mr-20"></i>
+							<span class="right-nav-text">Badges</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Unit'))
+				<li>
+					<a class="{{(Request::is('admin/units')? 'active': '')}}
+							  {{(Request::is('admin/units/create')? 'active': '')}}
+							  {{(Request::is('admin/units/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('unit.index') }}">
+						<div class="pull-left">
+							<i class="ti-clip mr-20"></i>
+							<span class="right-nav-text">Units</span>
 						</div>
 						<div class="clearfix"></div>
 					</a>
