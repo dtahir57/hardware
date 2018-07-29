@@ -21,7 +21,7 @@ class CreateProductConditionsTable extends Migration
             $table->string('warranty');
             $table->string('warranty_description');
             $table->string('slug');
-            $table->boolean('is_active');
+            $table->boolean('is_active')->default(1);
             $table->timestamps();
         });
     }

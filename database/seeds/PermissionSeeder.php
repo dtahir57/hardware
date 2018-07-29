@@ -57,5 +57,15 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'unit', 'name' => 'Add_Unit']);
         Permission::create(['module' => 'unit', 'name' => 'Edit_Unit']);
         Permission::create(['module' => 'unit', 'name' => 'Delete_Unit']);
+
+        Permission::create(['module' => 'product_condition', 'name' => 'View_Product_Condition']);
+        Permission::create(['module' => 'product_condition', 'name' => 'Add_Product_Condition']);
+        Permission::create(['module' => 'product_condition', 'name' => 'Edit_Product_Condition']);
+        Permission::create(['module' => 'product_condition', 'name' => 'Delete_Product_Condition']);
+
+        Permission::create(['module' => 'shipping_rule', 'name' => 'View_Shipping_Rule']);
+        Permission::create(['module' => 'shipping_rule', 'name' => 'Add_Shipping_Rule']);
+        Permission::create(['module' => 'shipping_rule', 'name' => 'Edit_Shipping_Rule']);
+        Permission::create(['module' => 'shipping_rule', 'name' => 'Delete_Shipping_Rule']);
     }
 }

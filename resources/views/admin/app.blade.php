@@ -441,6 +441,32 @@
 					</a>
 				</li>
 				@endif
+				@if(auth::user()->can('View_Product_Condition'))
+				<li>
+					<a class="{{(Request::is('admin/product_conditions')? 'active': '')}}
+							  {{(Request::is('admin/product_conditions/create')? 'active': '')}}
+							  {{(Request::is('admin/product_conditions/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('product_condition.index') }}">
+						<div class="pull-left">
+							<i class="ti-notepad mr-20"></i>
+							<span class="right-nav-text">Product Condition</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->can('View_Shipping_Rule'))
+				<li>
+					<a class="{{(Request::is('admin/shipping_rules')? 'active': '')}}
+							  {{(Request::is('admin/shipping_rules/create')? 'active': '')}}
+							  {{(Request::is('admin/shipping_rules/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('shipping_rule.index') }}">
+						<div class="pull-left">
+							<i class="ti-truck mr-20"></i>
+							<span class="right-nav-text">Shipping Rules</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
 				<li>
 					<a class="{{ (Request::is('admin/permissions')? 'active': '') }}
 							  {{ (Request::is('admin/permissions/create')? 'active': '') }}

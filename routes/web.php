@@ -211,6 +211,48 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**
 	 * Ending Routes For UnitController
 	 */
+	
+	/**
+	 * Starting Routes For ProductConditionController
+	 */
+	Route::group(['middleware' => ['permission:View_Product_Condition']], function () {
+		Route::get('product_conditions', 'Settings\ProductConditionController@index')->name('product_condition.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Product_Condition']], function () {
+		Route::get('product_conditions/create', 'Settings\ProductConditionController@create')->name('product_condition.create');
+		Route::post('product_conditions', 'Settings\ProductConditionController@store')->name('product_condition.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Product_Condition']], function () {
+		Route::get('product_conditions/{id}/edit', 'Settings\ProductConditionController@edit')->name('product_condition.edit');
+		Route::patch('product_conditions/{id}', 'Settings\ProductConditionController@update')->name('product_condition.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Product_Condition']], function () {
+		Route::get('product_conditions/destroy/{id}', 'Settings\ProductConditionController@destroy')->name('product_condition.destroy');
+	});
+	/**
+	 * Ending Routes For ProductConditionController
+	 */
+	
+	/**
+	 * Starting Routes For ShippingRuleController
+	 */
+	Route::group(['middleware' => ['permission:View_Shipping_Rule']], function () {
+		Route::get('shipping_rules', 'Settings\ShippingRuleController@index')->name('shipping_rule.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Shipping_Rule']], function () {
+		Route::get('shipping_rules/create', 'Settings\ShippingRuleController@create')->name('shipping_rule.create');
+		Route::post('shipping_rules', 'Settings\ShippingRuleController@store')->name('shipping_rule.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Shipping_Rule']], function () {
+		Route::get('shipping_rules/{id}/edit', 'Settings\ShippingRuleController@edit')->name('shipping_rule.edit');
+		Route::patch('shipping_rules/{id}', 'Settings\ShippingRuleController@update')->name('shipping_rule.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Shipping_Rule']], function () {
+		Route::get('shipping_rules/destroy/{id}', 'Settings\ShippingRuleController@destroy')->name('shipping_rule.destroy');
+	});
+	/**
+	 * Ending Routes For ShippingRuleController
+	 */
 
 	/**
 	 * Starting Routes For ProductController
