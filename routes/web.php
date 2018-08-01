@@ -253,6 +253,37 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**
 	 * Ending Routes For ShippingRuleController
 	 */
+	
+	/**
+	 * Starting Routes For ECommerceSettingController
+	 */
+	Route::group(['middleware' => ['role:Super_User']], function () {
+		Route::get('settings', 'Settings\ECommerceSettingController@index')->name('setting.index');
+	});
+	/**
+	 * Ending Routes For ECommerceSettingController
+	 */
+	
+	/**
+	 * Starting Routes For SupplierController
+	 */
+	Route::group(['middleware' => ['permission:View_Supplier']], function () {
+		Route::get('suppliers', 'Settings\SupplierController@index')->name('supplier.index');
+	});
+	Route::group(['middleware' => ['permission:Add_Supplier']], function () {
+		Route::get('suppliers/create', 'Settings\SupplierController@create')->name('supplier.create');
+		Route::post('suppliers', 'Settings\SupplierController@store')->name('supplier.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Supplier']], function () {
+		Route::get('suppliers/{id}/edit', 'Settings\SupplierController@edit')->name('supplier.edit');
+		Route::patch('suppliers/{id}', 'Settings\SupplierController@update')->name('supplier.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Supplier']], function () {
+		Route::get('suppliers/destroy/{id}', 'Settings\SupplierController@destroy')->name('supplier.destroy');
+	});
+	/**
+	 * Ending Routes For SupplierController
+	 */
 
 	/**
 	 * Starting Routes For ProductController

@@ -67,5 +67,10 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'shipping_rule', 'name' => 'Add_Shipping_Rule']);
         Permission::create(['module' => 'shipping_rule', 'name' => 'Edit_Shipping_Rule']);
         Permission::create(['module' => 'shipping_rule', 'name' => 'Delete_Shipping_Rule']);
+
+        Permission::create(['module' => 'supplier', 'name' => 'View_Supplier']);
+        Permission::create(['module' => 'supplier', 'name' => 'Add_Supplier']);
+        Permission::create(['module' => 'supplier', 'name' => 'Edit_Supplier']);
+        Permission::create(['module' => 'supplier', 'name' => 'Delete_Supplier']);
     }
 }

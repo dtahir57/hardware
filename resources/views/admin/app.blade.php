@@ -467,6 +467,31 @@
 					</a>
 				</li>
 				@endif
+				@if(auth::user()->can('View_Supplier'))
+				<li>
+					<a class="{{(Request::is('admin/suppliers')? 'active': '')}}
+							  {{(Request::is('admin/suppliers/create')? 'active': '')}}
+							  {{(Request::is('admin/suppliers/'.request()->route('id').'/edit')? 'active': '')}}" href="{{ route('supplier.index') }}">
+						<div class="pull-left">
+							<i class="ti-wheelchair mr-20"></i>
+							<span class="right-nav-text">Suppliers</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
+				@if(auth::user()->hasRole('Super_User'))
+				<li>
+					<a class="{{(Request::is('admin/settings')? 'active': '')}}
+							  {{(Request::is('admin/settings/create')? 'active': '')}}" href="{{ route('setting.index') }}">
+						<div class="pull-left">
+							<i class="ti-settings mr-20"></i>
+							<span class="right-nav-text">Settings</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
 				<li>
 					<a class="{{ (Request::is('admin/permissions')? 'active': '') }}
 							  {{ (Request::is('admin/permissions/create')? 'active': '') }}
