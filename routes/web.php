@@ -259,6 +259,8 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	 */
 	Route::group(['middleware' => ['role:Super_User']], function () {
 		Route::get('settings', 'Settings\ECommerceSettingController@index')->name('setting.index');
+		Route::post('settings/shipping', 'Settings\ECommerceSettingController@store')->name('setting.shipping.store');
+		Route::post('settings/search', 'Settings\ECommerceSettingController@storeSearch')->name('setting.search.store');
 	});
 	/**
 	 * Ending Routes For ECommerceSettingController
@@ -294,6 +296,13 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	Route::group(['middleware' => ['permission:Add_Product']], function () {
 		Route::get('products/create', 'Settings\ProductController@create')->name('product.create');
 		Route::post('products', 'Settings\ProductController@store')->name('product.store');
+	});
+	Route::group(['middleware' => ['permission:Edit_Product']], function () {
+		Route::get('products/{id}/edit', 'Settings\ProductController@edit')->name('product.edit');
+		Route::patch('products/{id}', 'Settings\ProductController@update')->name('product.update');
+	});
+	Route::group(['middleware' => ['permission:Delete_Product']], function () {
+		Route::get('products/destroy/{id}', 'Settings\ProductController@destroy')->name('product.destroy');
 	});
 	/**
 	 * Ending Routes For ProductController

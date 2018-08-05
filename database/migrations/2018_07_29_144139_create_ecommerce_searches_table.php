@@ -16,7 +16,7 @@ class CreateEcommerceSearchesTable extends Migration
         Schema::create('ecommerce_searches', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('title_weight');
-            $table->integer('content_weight');
+            $table->float('content_weight');
             $table->boolean('is_wildcard_search');
             $table->timestamps();
         });

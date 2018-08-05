@@ -33,6 +33,11 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'category', 'name' => 'Delete_Category']);
         Permission::create(['module' => 'category', 'name' => 'Feature_Category']);
 
+        Permission::create(['module' => 'product', 'name' => 'View_Product']);
+        Permission::create(['module' => 'product', 'name' => 'Add_Product']);
+        Permission::create(['module' => 'product', 'name' => 'Edit_Product']);
+        Permission::create(['module' => 'product', 'name' => 'Delete_Product']);
+
         Permission::create(['module' => 'manufacturer', 'name' => 'View_Manufacturer']);
         Permission::create(['module' => 'manufacturer', 'name' => 'Add_Manufacturer']);
         Permission::create(['module' => 'manufacturer', 'name' => 'Edit_Manufacturer']);
