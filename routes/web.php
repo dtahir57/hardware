@@ -12,12 +12,16 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+	$categories = Hardware\Http\Models\Category::where('is_active', 1)->get();
+	$featured = Hardware\Http\Models\Product::where('is_featured', 1)->get();
+    return view('welcome', compact('categories', 'featured'));
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/shop', 'ShopController@index')->name('shop.index');
 
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**

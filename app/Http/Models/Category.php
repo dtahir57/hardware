@@ -10,4 +10,8 @@ class Category extends Model
     public function products () {
     	return $this->belongsToMany(Product::class);
     }
+
+    public function has_childrens () {
+    	return $this->hasMany(Category::class, 'parent_category');
+    }
 }

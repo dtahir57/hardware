@@ -43,8 +43,7 @@ class CategoryRequest extends FormRequest
                 {
                     return [
                         'title' => 'required|max:255',
-                        'description' => 'required',
-                        'thumbnail' => 'required|image'
+                        'description' => 'required'
                     ];
                 }
             default:

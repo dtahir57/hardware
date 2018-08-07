@@ -90,8 +90,8 @@ class CategoryController extends Controller
         $category = Category::findOrFail($id);
         $category->title = $request->title;
         $category->description = $request->description;
-        File::delete($category->thumbnail);
         if ($request->hasFile('thumbnail')) {
+            File::delete($category->thumbnail);
             $category->thumbnail = $request->thumbnail->store('public/categories');
         }
         $category->slug = str_slug($request->title, '-');

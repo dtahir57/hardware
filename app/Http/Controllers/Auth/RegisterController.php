@@ -7,6 +7,7 @@ use Hardware\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Hardware\Http\Models\Category;
 
 class RegisterController extends Controller
 {
@@ -38,6 +39,12 @@ class RegisterController extends Controller
     public function __construct()
     {
         $this->middleware('guest');
+    }
+
+    public function showRegistrationForm()
+    {
+        $categories = Category::where('is_active', 1)->get();
+        return view('auth.register', compact('categories'));
     }
 
     /**

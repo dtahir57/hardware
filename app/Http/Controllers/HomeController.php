@@ -3,6 +3,7 @@
 namespace Hardware\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hardware\Http\Models\Category;
 
 class HomeController extends Controller
 {
@@ -23,6 +24,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $categories = Category::where('is_active', 1)->get();
+        return view('home', compact('categories'));
     }
 }
