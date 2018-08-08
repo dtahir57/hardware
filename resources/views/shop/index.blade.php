@@ -108,11 +108,11 @@
                 @if($category->childs)
                   <ul>
                     @foreach($category->childs as $sub)
-                    <li><a href="#">{{ $sub->title }}</a>
+                    <li><a @if($sub->childs->count() > 0) href="#" @else href="{{ route('category.show', $sub->slug) }}" @endif>{{ $sub->title }}</a>
                     @if($sub->childs)
                       @foreach($sub->childs as $child_lvl_2)
                       <ul>
-                        <li><a href="#">{{ $child_lvl_2->title }}</a></li>
+                        <li><a href="{{ route('category.show', $child_lvl_2->slug) }}">{{ $child_lvl_2->title }}</a></li>
                       </ul>
                       @endforeach
                     @endif
