@@ -6,7 +6,7 @@
     <div class="user-info">
       <div class="user-avatar"><a class="edit-avatar" href="#"></a><img src="{{ asset('frontend/img/account/user-ava.jpg')}}" alt="User"></div>
       <div class="user-data">
-        <h4 class="h5">{{ Auth::user()->name }}</h4><span>Joined {{ Auth::user()->created_at }}</span>
+        <h4 class="h5">{{ Auth::user()->name }}</h4><span>Joined {{ Auth::user()->created_at->diffForHumans() }}</span>
       </div>
     </div>
   </aside>

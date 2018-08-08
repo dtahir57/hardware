@@ -160,7 +160,6 @@ return [
         Hardware\Providers\EventServiceProvider::class,
         Hardware\Providers\RouteServiceProvider::class,
         Spatie\Permission\PermissionServiceProvider::class,
-
     ],
 
     /*

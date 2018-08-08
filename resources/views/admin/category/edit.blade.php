@@ -1,7 +1,11 @@
 @extends('admin.app')
 
 @section('admin-title', 'Edit Category')
-
+<style type="text/css">
+	.diplayCategory {
+		display: none;
+	}
+</style>
 @section('admin-content')
 <div class="row">
 	<div class="col-md-12">
@@ -32,6 +36,9 @@
 			@foreach($errors->all() as $error)
 				<li class="alert alert-danger">{{ $error }}</li>
 			@endforeach
+			@if(session('error'))
+				<li class="alert alert-danger">{{ session('error') }}</li>
+			@endif
 			<div class="panel panel-default card-view">
 				<div class="panel-heading">
 					<div class="pull-left">
@@ -73,7 +80,9 @@
 										<br>
 										@foreach($categories as $_category)
 										<div class="radio radio-success">
-											<input type="radio" name="parent_category" id="radio3" value="{{ $_category->title }}" @if($_category->title == $category->title) disabled @endif @if($category->parent_category == $_category->title) checked @endif />
+											<input type="radio" name="parent_category" id="radio3" value="{{ $_category->id }}" 
+											@if($_category->title == $category->title) disabled @endif 
+											@if($category->parent_id == $_category->id) checked @endif />
 											<label for="radio3"> {{ $_category->title }} </label>
 										</div>
 										@endforeach

@@ -91,106 +91,25 @@
           <h3 class="widget-title">Shop Categories</h3>
           @foreach($categories as $category)
           <ul>
-            <li><a href="">{{ $category->title }}</a></li>
+            <li @if($category->childs->count() > 0) class="has-children" @endif><a href="#">{{ $category->title }}</a>
+                @if($category->childs)
+                  <ul>
+                    @foreach($category->childs as $sub)
+                    <li><a href="#">{{ $sub->title }}</a>
+                    @if($sub->childs)
+                      @foreach($sub->childs as $child_lvl_2)
+                      <ul>
+                        <li><a href="#">{{ $child_lvl_2->title }}</a></li>
+                      </ul>
+                      @endforeach
+                    @endif
+                    </li>
+                    @endforeach
+                  </ul>
+                @endif
+            </li>
           </ul>
           @endforeach
-          <ul>
-            <li class="has-children expanded"><a href="#">Computers &amp; Accessories</a><span>(1138)</span>
-              <ul>
-                <li><a href="#">Desktop PCs</a><span>(508)</span>
-                  <ul>
-                    <li><a href="#">Office PC</a></li>
-                    <li><a href="#">Gaming PC</a></li>
-                    <li><a href="#">PC for Learning</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Laptops</a><span>(423)</span>
-                  <ul>
-                    <li><a href="#">15' Screens </a></li>
-                    <li><a href="#">13' Screens</a></li>
-                    <li><a href="#">Touch Screens</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Nettops</a><span>(97)</span></li>
-                <li><a href="#">PC Accessories</a><span>(110)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Smartphones &amp; Tablets</a><span>(2356)</span>
-              <ul>
-                <li><a href="#">Smartphones</a><span>(1032)</span>
-                  <ul>
-                    <li><a href="#">Android</a></li>
-                    <li><a href="#">iOS</a></li>
-                    <li><a href="#">QHD Screen</a></li>
-                    <li><a href="#">WQHD Screen</a></li>
-                    <li><a href="#">Full HD Screen</a></li>
-                    <li><a href="#">Super Amoled</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Tablets</a><span>(937)</span>
-                  <ul>
-                    <li><a href="#">Wifi only</a></li>
-                    <li><a href="#">Wifi + 3G</a></li>
-                    <li><a href="#">Android</a></li>
-                    <li><a href="#">iOS</a></li>
-                  </ul>
-                </li>
-                <li><a href="#">Phablets</a><span>(386)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">TV, Video &amp; Audio</a><span>(420)</span>
-              <ul>
-                <li><a href="#">Smart TV Sets</a><span>(180)</span></li>
-                <li><a href="#">Blue-Ray Players</a><span>(132)</span></li>
-                <li><a href="#">Sound Systems</a><span>(47)</span></li>
-                <li><a href="#">Home Theaters</a><span>(61)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Cameras, Photo &amp; Video</a><span>(874)</span>
-              <ul>
-                <li><a href="#">Photo Cameras</a><span>(211)</span></li>
-                <li><a href="#">Video Cameras</a><span>(195)</span></li>
-                <li><a href="#">Action Cameras</a><span>(159)</span></li>
-                <li><a href="#">Tripods &amp; Stands</a><span>(203)</span></li>
-                <li><a href="#">Lenses</a><span>(106)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Headphones</a><span>(1239)</span>
-              <ul>
-                <li><a href="#">Earbud Headphones</a><span>(752)</span></li>
-                <li><a href="#">Over-Ear Headphones</a><span>(487)</span></li>
-                <li><a href="#">Bluetooth Headphones</a><span>(205)</span></li>
-                <li><a href="#">Sports &amp; Fitness Headphones</a><span>(96)</span></li>
-                <li><a href="#">Noise-Cancelling Headphones</a><span>(113)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Wearable Electronics</a><span>(340)</span>
-              <ul>
-                <li><a href="#">Smart Watches</a><span>(175)</span></li>
-                <li><a href="#">Fitness Trackers</a><span>(123)</span></li>
-                <li><a href="#">Smart Glasses</a><span>(42)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Printers &amp; Ink</a><span>(512)</span>
-              <ul>
-                <li><a href="#">All-In-One</a><span>(304)</span></li>
-                <li><a href="#">Copying</a><span>(115)</span></li>
-                <li><a href="#">Faxing</a><span>(211)</span></li>
-                <li><a href="#">Photo Printing</a><span>(68)</span></li>
-                <li><a href="#">Printing Only</a><span>(143)</span></li>
-                <li><a href="#">Scanning</a><span>(122)</span></li>
-              </ul>
-            </li>
-            <li class="has-children"><a href="#">Video Games</a><span>(656)</span>
-              <ul>
-                <li><a href="#">PlayStation 4</a><span>(100)</span></li>
-                <li><a href="#">Xbox One</a><span>(92)</span></li>
-                <li><a href="#">Nintendo Switch</a><span>(19)</span></li>
-                <li><a href="#">Games</a><span>(397)</span></li>
-                <li><a href="#">Accessories</a><span>(48)</span></li>
-              </ul>
-            </li>
-          </ul>
         </section>
         <!-- Widget Price Range-->
         <section class="widget widget-categories">

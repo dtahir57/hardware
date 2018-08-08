@@ -11,7 +11,7 @@ class Category extends Model
     	return $this->belongsToMany(Product::class);
     }
 
-    public function has_childrens () {
-    	return $this->hasMany(Category::class, 'parent_category');
+    public function childs () {
+    	return $this->hasMany('Hardware\Http\Models\Category', 'parent_id');
     }
 }

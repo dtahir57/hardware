@@ -18,7 +18,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::with('childs')->get();
         return view('admin.category.index', compact('categories'));
     }
 
@@ -29,7 +29,8 @@ class CategoryController extends Controller
      */
     public function create()
     {
-        return view('admin.category.create');
+        $categories = Category::latest()->get();
+        return view('admin.category.create', compact('categories'));
     }
 
     /**
@@ -47,7 +48,13 @@ class CategoryController extends Controller
             $category->thumbnail = $request->thumbnail->store('public/categories');
         }
         $category->slug = str_slug($request->title, '-');
-        $category->save();
+        if (!$request->parent_category) {
+            $category->save();
+        } else {
+            $category->parent_id = $request->parent_category;
+            $category->save();
+        }
+        // $category->save();
         if ($category) {
             Session::flash('created', 'New Category Added Successfully');
             return redirect()->route('category.index');
@@ -88,6 +95,12 @@ class CategoryController extends Controller
     public function update(CategoryRequest $request, $id)
     {
         $category = Category::findOrFail($id);
+        $parent = Category::findOrFail($request->parent_category);
+
+        if ($category->id == $parent->parent_id) {
+            Session::flash('error', 'Error while Updating!! A child of a parent cannot be parent of its own parent!');
+            return redirect()->back();
+        }
         $category->title = $request->title;
         $category->description = $request->description;
         if ($request->hasFile('thumbnail')) {
@@ -95,14 +108,13 @@ class CategoryController extends Controller
             $category->thumbnail = $request->thumbnail->store('public/categories');
         }
         $category->slug = str_slug($request->title, '-');
-        if ($request->parent_category) {
-            $category->is_parent = 1;
-            $category->parent_category = $request->parent_category;
-        }
         if ($request->is_active) {
             $category->is_active = 1;
         } else {
             $category->is_active = 0;
+        }
+        if ($request->parent_category) {
+            $category->parent_id = $request->parent_category;
         }
         $category->update();
         if ($category) {

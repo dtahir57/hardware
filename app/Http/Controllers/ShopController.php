@@ -15,7 +15,7 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $categories = Category::latest()->get();
+        $categories = Category::with('childs')->get();
         $products = Product::latest()->get();
         return view('shop.index', compact('categories', 'products'));
     }

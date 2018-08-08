@@ -159,7 +159,7 @@
             </div>
             <div class="toolbar-item"><a href="product-comparison.html">
                 <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">3</span></span><span class="text-label">Compare</span></div></a></div>
-            <div class="toolbar-item"><a href="account-login.html">
+            <div class="toolbar-item"><a href="{{ route('register') }}">
                 <div><i class="icon-user"></i><span class="text-label">Sign In / Up</span></div></a></div>
           </div>
           <!-- Slideable (Mobile) Menu-->
