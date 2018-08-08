@@ -51,9 +51,14 @@ class ShopController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show($slug)
     {
-        //
+        $manufacturers = Manufacturer::where('is_active', 1)->get();
+        $categories = Category::with('childs')->get();
+        $category = Category::with('products')->where('slug',$slug)->get();
+        $cartItems = Cart::content();
+        // dd($category{0}->products);
+        return view('category.index', compact('category', 'manufacturers', 'categories', 'cartItems'));
     }
 
     /**

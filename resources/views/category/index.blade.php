@@ -51,7 +51,7 @@
       </div>
       <!-- Products Grid-->
       <div class="row">
-      	@foreach($products as $product)
+      	@foreach($category{0}->products as $product)
         <div class="col-md-4 col-sm-6">
           <div class="product-card mb-30">
             <a class="product-thumb" href="shop-single.html"><img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product"></a>
@@ -108,11 +108,11 @@
                 @if($category->childs)
                   <ul>
                     @foreach($category->childs as $sub)
-                    <li><a href="#">{{ $sub->title }}</a>
+                    <li><a @if($sub->childs->count() > 0) href="#" @else href="{{ route('category.show', $sub->slug) }}" @endif>{{ $sub->title }}</a>
                     @if($sub->childs)
                       @foreach($sub->childs as $child_lvl_2)
                       <ul>
-                        <li><a href="#">{{ $child_lvl_2->title }}</a></li>
+                        <li><a href="{{ route('category.show', $child_lvl_2->slug) }}">{{ $child_lvl_2->title }}</a></li>
                       </ul>
                       @endforeach
                     @endif

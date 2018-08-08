@@ -82,7 +82,7 @@
           <div class="toolbar-item hidden-on-mobile"><a href="product-comparison.html">
               <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">{{ Cart::count() }}</span></span><span class="text-label">Compare</span></div></a></div>
           <div class="toolbar-item hidden-on-mobile">
-            <a href="{{ route('register') }}">
+            <a href="{{ route('login') }}">
               <div>
                 <i class="icon-user"></i>
                 <span class="text-label">Sign In / Up</span>
@@ -144,7 +144,7 @@
             </div>
             <div class="toolbar-item"><a href="product-comparison.html">
                 <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">3</span></span><span class="text-label">Compare</span></div></a></div>
-            <div class="toolbar-item"><a href="{{ route('register') }}">
+            <div class="toolbar-item"><a href="{{ route('login') }}">
                 <div><i class="icon-user"></i><span class="text-label">Sign In / Up</span></div></a></div>
           </div>
           <!-- Slideable (Mobile) Menu-->

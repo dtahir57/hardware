@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Hardware\Http\Models\Category;
+use Cart;
 
 class RegisterController extends Controller
 {
@@ -43,8 +44,9 @@ class RegisterController extends Controller
 
     public function showRegistrationForm()
     {
+        $cartItems = Cart::content();
         $categories = Category::where('is_active', 1)->get();
-        return view('auth.register', compact('categories'));
+        return view('auth.register', compact('categories', 'cartItems'));
     }
 
     /**

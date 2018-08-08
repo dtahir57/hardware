@@ -5,6 +5,7 @@ namespace Hardware\Http\Controllers\Auth;
 use Hardware\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Hardware\Http\Models\Category;
+use Cart;
 
 class LoginController extends Controller
 {
@@ -40,7 +41,8 @@ class LoginController extends Controller
 
     public function showLoginForm()
     {
+        $cartItems = Cart::content();
         $categories = Category::where('is_active', 1)->get();
-        return view('auth.login', compact('categories'));
+        return view('auth.login', compact('categories', 'cartItems'));
     }
 }
