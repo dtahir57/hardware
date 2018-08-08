@@ -82,6 +82,7 @@
           <div class="toolbar-item hidden-on-mobile"><a href="product-comparison.html">
               <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">{{ Cart::count() }}</span></span><span class="text-label">Compare</span></div></a></div>
           <div class="toolbar-item hidden-on-mobile">
+            @guest
             <a href="{{ route('login') }}">
               <div>
                 <i class="icon-user"></i>
@@ -92,6 +93,14 @@
               <p class="text-xs mb-3 pt-2">Sign in to your account or register new one to have full control over your orders, receive bonuses and more.</p><a class="btn btn-primary btn-sm btn-block" href="{{ route('register') }}">Sign In</a>
               <p class="text-xs text-muted mb-2">New customer?&nbsp;<a href="{{ route('register') }}">Register</a></p>
             </div>
+            @else 
+            <a href="{{ route('home') }}">
+              <div>
+                <i class="icon-user"></i>
+                <span class="text-label">{{ Auth::user()->name }}</span>
+              </div>
+            </a>
+            @endguest
           </div>
           <div class="toolbar-item"><a href="{{ route('cart.index') }}">
               <div><span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label">{{ Cart::count() }}   </span></span><span class="text-label">Cart</span></div></a>

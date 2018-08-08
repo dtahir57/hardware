@@ -48,7 +48,7 @@
 			<div class="mobile-only-brand pull-left">
 				<div class="nav-header pull-left">
 					<div class="logo-wrap">
-						<a href="index.html">
+						<a href="{{ url('/') }}">
 							<img class="brand-img" src="{{ asset('images/logo.png')}}" style="width: 100% auto; height: 50px;" alt="brand"/>
 						</a>
 					</div>
