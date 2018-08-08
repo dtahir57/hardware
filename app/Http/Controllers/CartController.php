@@ -75,7 +75,8 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        Cart::update($id, $request->qty);
+        return redirect()->back();
     }
 
     /**
@@ -87,5 +88,17 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function removeItem($id)
+    {
+        Cart::remove($id);
+        return redirect()->back();
+    }
+
+    public function flush ()
+    {
+        Cart::destroy();
+        return redirect()->back();
     }
 }

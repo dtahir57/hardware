@@ -28,6 +28,12 @@ Route::get('/cart', 'CartController@index')->name('cart.index');
 
 Route::get('/cart/{id}', 'CartController@show')->name('cart.show');
 
+Route::get('/cart/item/remove/{id}', 'CartController@removeItem')->name('cart.remove');
+
+Route::patch('/cart/item/update/{id}', 'CartController@update')->name('cart.update');
+
+Route::get('/cart/items/flush', 'CartController@flush')->name('cart.flush');
+
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**
 	 * Starting Routes For PermissionController

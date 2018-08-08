@@ -29,7 +29,7 @@
           <th class="text-center">Update Cart</th>
           <th class="text-center">Subtotal</th>
           <th class="text-center">Discount</th>
-          <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="#">Clear Cart</a></th>
+          <th class="text-center"><a class="btn btn-sm btn-outline-danger" href="{{ route('cart.flush') }}">Clear Cart</a></th>
         </tr>
       </thead>
       <tbody>
@@ -42,23 +42,21 @@
               </div>
             </div>
           </td>
+          <form method="POST" action="{{ route('cart.update', $cartItem->rowId) }}">
+            @csrf
+            <input type="hidden" name="_method" value="PATCH">
           <td class="text-center">
             <div class="count-input">
-              <select class="form-control">
-                <option>1</option>
-                <option>2</option>
-                <option>3</option>
-                <option>4</option>
-                <option>5</option>
-              </select>
+              <input type="number" name="qty" min="1" value="{{ $cartItem->qty }}" class="form-control" />
             </div>
           </td>
           <td class="text-center">
-          	<a class="btn btn-secondary" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Your cart" data-toast-message="is updated successfully!">Update Cart</a>
+          	<button class="btn btn-secondary" type="submit">Update Cart</button>
           </td>
+          </form>
           <td class="text-center text-lg">${{ Cart::subtotal() }}</td>
           <td class="text-center text-lg">$35.00</td>
-          <td class="text-center"><a class="remove-from-cart" href="#" data-toggle="tooltip" title="Remove item"><i class="icon-x"></i></a></td>
+          <td class="text-center"><a class="remove-from-cart" href="{{ route('cart.remove', $cartItem->rowId) }}" data-toggle="tooltip" title="Remove item"><i class="icon-x"></i></a></td>
         </tr>
         @endforeach
       </tbody>
@@ -71,7 +69,7 @@
         <button class="btn btn-outline-primary btn-sm" type="submit">Apply Coupon</button>
       </form>
     </div>
-    <div class="column text-lg"><span class="text-muted">Subtotal:&nbsp; </span><span class="text-gray-dark">$2,548.50</span></div>
+    <div class="column text-lg"><span class="text-muted">Subtotal:&nbsp; </span><span class="text-gray-dark">${{ Cart::subtotal() }}</span></div>
   </div>
   <div class="shopping-cart-footer">
     <div class="column"><a class="btn btn-outline-secondary" href="{{ route('shop.index') }}"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
