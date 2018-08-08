@@ -43,6 +43,7 @@ class CreateProductsTable extends Migration
             $table->text('notes');
             $table->string('document');
             $table->string('seo_tool');
+            $table->string('slug');
             $table->timestamps();
         });
     }

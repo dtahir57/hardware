@@ -12,9 +12,10 @@
 */
 
 Route::get('/', function () {
+	$cartItems = Cart::content();
 	$categories = Hardware\Http\Models\Category::where('is_active', 1)->get();
 	$featured = Hardware\Http\Models\Product::where('is_featured', 1)->get();
-    return view('welcome', compact('categories', 'featured'));
+    return view('welcome', compact('categories', 'featured', 'cartItems'));
 });
 
 Auth::routes();
@@ -22,6 +23,10 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/shop', 'ShopController@index')->name('shop.index');
+
+Route::get('/cart', 'CartController@index')->name('cart.index');
+
+Route::get('/cart/{id}', 'CartController@show')->name('cart.show');
 
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**

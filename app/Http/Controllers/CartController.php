@@ -3,12 +3,11 @@
 namespace Hardware\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Cart;
 use Hardware\Http\Models\Category;
 use Hardware\Http\Models\Product;
-use Hardware\Http\Models\Manufacturer;
-use Cart;
 
-class ShopController extends Controller
+class CartController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,11 +16,9 @@ class ShopController extends Controller
      */
     public function index()
     {
-        $manufacturers = Manufacturer::where('is_active', 1)->get();
-        $categories = Category::with('childs')->get();
-        $products = Product::latest()->get();
         $cartItems = Cart::content();
-        return view('shop.index', compact('categories', 'products', 'manufacturers', 'cartItems'));
+        $categories = Category::latest()->get();
+        return view('cart.index', compact('cartItems', 'categories'));
     }
 
     /**
@@ -53,7 +50,9 @@ class ShopController extends Controller
      */
     public function show($id)
     {
-        //
+        $product = Product::findOrFail($id);
+        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1, 'price' => $product->product_has_price->plc_hardware_price, 'options' => ['image' => $product->product_has_images{0}->img_url]]);
+        return redirect()->back();
     }
 
     /**

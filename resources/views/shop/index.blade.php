@@ -59,10 +59,23 @@
               <div class="product-category"><a href="#">{{ $product->categories{0}->title }}</a></div>
               <h3 class="product-title"><a href="shop-single.html">{{ $product->title }}</a></h3>
               <h4 class="product-price">
-                {{ $product->product_has_price->plc_hardware_price }}
+                ${{ $product->product_has_price->plc_hardware_price }}
               </h4>
             </div>
-            <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="#" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
+            <div class="product-button-group">
+              <a class="product-button btn-wishlist" href="#">
+                <i class="icon-heart"></i>
+                <span>Wishlist</span>
+              </a>
+              <a class="product-button btn-compare" href="#">
+                <i class="icon-repeat"></i>
+                <span>Compare</span>
+              </a>
+              <a class="product-button" href="{{ route('cart.show', $product->id) }}" data-toast data-toast-type="success" data-toast-position="topRight" data-toast-icon="icon-check-circle" data-toast-title="Product" data-toast-message="successfuly added to cart!">
+                <i class="icon-shopping-cart"></i>
+                <span>To Cart</span>
+              </a>
+            </div>
           </div>
         </div>
         @endforeach
@@ -156,42 +169,12 @@
         <!-- Widget Brand Filter-->
         <section class="widget">
           <h3 class="widget-title">Filter by Brand</h3>
+          @foreach($manufacturers as $manufacturer)
           <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="apple">
-            <label class="custom-control-label" for="apple">Apple&nbsp;<span class="text-muted">(254)</span></label>
+            <input class="custom-control-input" type="checkbox" id="{{ $manufacturer->name }}">
+            <label class="custom-control-label" for="{{ $manufacturer->name }}">{{ $manufacturer->name }}&nbsp;<span class="text-muted">({{ $manufacturer->products->count() }})</span></label>
           </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="bosh">
-            <label class="custom-control-label" for="bosh">Bosh&nbsp;<span class="text-muted">(39)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="canon">
-            <label class="custom-control-label" for="canon">Canon Inc.&nbsp;<span class="text-muted">(128)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="dell">
-            <label class="custom-control-label" for="dell">Dell&nbsp;<span class="text-muted">(310)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="hewlet">
-            <label class="custom-control-label" for="hewlet">Hewlett-Packard&nbsp;<span class="text-muted">(42)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="hitachi">
-            <label class="custom-control-label" for="hitachi">Hitachi&nbsp;<span class="text-muted">(217)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="lg">
-            <label class="custom-control-label" for="lg">LG Electronics&nbsp;<span class="text-muted">(310)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="panasonic">
-            <label class="custom-control-label" for="panasonic">Panasonic&nbsp;<span class="text-muted">(74)</span></label>
-          </div>
-          <div class="custom-control custom-checkbox">
-            <input class="custom-control-input" type="checkbox" id="siemens">
-            <label class="custom-control-label" for="siemens">Siemens&nbsp;<span class="text-muted">(86)</span></label>
-          </div>
+          @endforeach
         </section>
       </aside>
     </div>

@@ -146,25 +146,25 @@
 												<br>
 												<div class="shippable">
 													<div class="form-group">
-														<input type="number" name="width" class="form-control" min="0" placeholder="Width" required />
+														<input type="number" name="width" class="form-control" min="0" placeholder="Width" />
 														@if (isset($setting))
 														<pre class="pull-right text-muted">{{ $setting->dimensions }}</pre>
 														@endif
 													</div>
 													<div class="form-group">
-														<input type="number" name="height" class="form-control" min="0" placeholder="Height" required />
+														<input type="number" name="height" class="form-control" min="0" placeholder="Height" />
 														@if (isset($setting))
 														<pre class="pull-right text-muted">{{ $setting->dimensions }}</pre>
 														@endif
 													</div>
 													<div class="form-group">
-														<input type="number" name="length" class="form-control" min="0" placeholder="Length" required />
+														<input type="number" name="length" class="form-control" min="0" placeholder="Length" />
 														@if (isset($setting))
 														<pre class="pull-right text-muted">{{ $setting->dimensions }}</pre>
 														@endif
 													</div>
 													<div class="form-group">
-														<input type="number" name="weight" class="form-control" min="0" placeholder="Weight" required />
+														<input type="number" name="weight" class="form-control" min="0" placeholder="Weight" />
 														@if (isset($setting))
 														<pre class="pull-right text-muted">{{ $setting->weight }}</pre>
 														@endif

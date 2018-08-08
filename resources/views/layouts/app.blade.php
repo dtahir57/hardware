@@ -80,7 +80,7 @@
             </ul>
           </div>
           <div class="toolbar-item hidden-on-mobile"><a href="product-comparison.html">
-              <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">3</span></span><span class="text-label">Compare</span></div></a></div>
+              <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">{{ Cart::count() }}</span></span><span class="text-label">Compare</span></div></a></div>
           <div class="toolbar-item hidden-on-mobile">
             <a href="{{ route('register') }}">
               <div>
@@ -93,38 +93,23 @@
               <p class="text-xs text-muted mb-2">New customer?&nbsp;<a href="{{ route('register') }}">Register</a></p>
             </div>
           </div>
-          <div class="toolbar-item"><a href="cart.html">
-              <div><span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label">3   </span></span><span class="text-label">Cart</span></div></a>
+          <div class="toolbar-item"><a href="{{ route('cart.index') }}">
+              <div><span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label">{{ Cart::count() }}   </span></span><span class="text-label">Cart</span></div></a>
             <div class="toolbar-dropdown cart-dropdown widget-cart hidden-on-mobile">
-              <!-- Entry-->
+              @foreach($cartItems as $cartItem)
               <div class="entry">
-                <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/04.jpg" alt="Product"></a></div>
+                <div class="entry-thumb"><a href="shop-single.html"><img src="{{ Storage::url($cartItem->options->image) }}" alt="Product"></a></div>
                 <div class="entry-content">
-                  <h4 class="entry-title"><a href="shop-single.html">Canon EOS M50 Mirrorless Camera</a></h4><span class="entry-meta">1 x $910.00</span>
+                  <h4 class="entry-title"><a href="shop-single.html">{{ $cartItem->name }}</a></h4><span class="entry-meta">{{ $cartItem->qty }} x ${{ $cartItem->price }}</span>
                 </div>
                 <div class="entry-delete"><i class="icon-x"></i></div>
               </div>
-              <!-- Entry-->
-              <div class="entry">
-                <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/05.jpg" alt="Product"></a></div>
-                <div class="entry-content">
-                  <h4 class="entry-title"><a href="shop-single.html">Apple iPhone X 256 GB Space Gray</a></h4><span class="entry-meta">1 x $1,450.00</span>
-                </div>
-                <div class="entry-delete"><i class="icon-x"></i></div>
-              </div>
-              <!-- Entry-->
-              <div class="entry">
-                <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/06.jpg" alt="Product"></a></div>
-                <div class="entry-content">
-                  <h4 class="entry-title"><a href="shop-single.html">HP LaserJet Pro Laser Printer</a></h4><span class="entry-meta">1 x $188.50</span>
-                </div>
-                <div class="entry-delete"><i class="icon-x"></i></div>
-              </div>
+              @endforeach
               <div class="text-right">
-                <p class="text-gray-dark py-2 mb-0"><span class='text-muted'>Subtotal:</span> &nbsp;$2,548.50</p>
+                <p class="text-gray-dark py-2 mb-0"><span class='text-muted'>Subtotal:</span> &nbsp;${{ Cart::subtotal() }}</p>
               </div>
               <div class="d-flex">
-                <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="cart.html">Expand Cart</a></div>
+                <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="{{route('shop.index')}}">Expand Cart</a></div>
                 <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="checkout.html">Checkout</a></div>
               </div>
             </div>
@@ -316,7 +301,7 @@
             <li class="has-submenu {{(Request::is('shop')? 'active' : '')}}"><a href="{{ route('shop.index') }}">Shop</a>
               <ul class="sub-menu">
                   <li><a href="{{ route('shop.index') }}">Shop Categories</a></li>
-                  <li><a href="cart.html">Cart</a></li>
+                  <li><a href="{{ route('cart.index') }}">Cart</a></li>
                 <li><a href="checkout-address.html">Checkout</a></li>
               </ul>
             </li>
@@ -410,38 +395,25 @@
           <div class="toolbar-inner">
             <div class="toolbar-item"><a href="product-comparison.html">
                 <div><span class="compare-icon"><i class="icon-repeat"></i><span class="count-label">3</span></span><span class="text-label">Compare</span></div></a></div>
-            <div class="toolbar-item"><a href="cart.html">
-                <div><span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label">3   </span></span><span class="text-label">Cart</span></div></a>
+            <div class="toolbar-item"><a href="{{ route('cart.index') }}">
+                <div><span class="cart-icon"><i class="icon-shopping-cart"></i><span class="count-label">{{ Cart::count() }}  </span></span><span class="text-label">Cart</span></div></a>
               <div class="toolbar-dropdown cart-dropdown widget-cart">
                 <!-- Entry-->
                 <div class="entry">
-                  <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/04.jpg" alt="Product"></a></div>
-                  <div class="entry-content">
-                    <h4 class="entry-title"><a href="shop-single.html">Canon EOS M50 Mirrorless Camera</a></h4><span class="entry-meta">1 x $910.00</span>
+                  @foreach($cartItems as $cartItem)
+                  <div class="entry">
+                    <div class="entry-thumb"><a href="shop-single.html"><img src="{{ Storage::url($cartItem->options->image) }}" alt="Product"></a></div>
+                    <div class="entry-content">
+                      <h4 class="entry-title"><a href="shop-single.html">{{ $cartItem->name }}</a></h4><span class="entry-meta">{{ $cartItem->qty }} x ${{ $cartItem->price }}</span>
+                    </div>
+                    <div class="entry-delete"><i class="icon-x"></i></div>
                   </div>
-                  <div class="entry-delete"><i class="icon-x"></i></div>
-                </div>
-                <!-- Entry-->
-                <div class="entry">
-                  <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/05.jpg" alt="Product"></a></div>
-                  <div class="entry-content">
-                    <h4 class="entry-title"><a href="shop-single.html">Apple iPhone X 256 GB Space Gray</a></h4><span class="entry-meta">1 x $1,450.00</span>
-                  </div>
-                  <div class="entry-delete"><i class="icon-x"></i></div>
-                </div>
-                <!-- Entry-->
-                <div class="entry">
-                  <div class="entry-thumb"><a href="shop-single.html"><img src="img/shop/widget/06.jpg" alt="Product"></a></div>
-                  <div class="entry-content">
-                    <h4 class="entry-title"><a href="shop-single.html">HP LaserJet Pro Laser Printer</a></h4><span class="entry-meta">1 x $188.50</span>
-                  </div>
-                  <div class="entry-delete"><i class="icon-x"></i></div>
-                </div>
+                  @endforeach
                 <div class="text-right">
                   <p class="text-gray-dark py-2 mb-0"><span class='text-muted'>Subtotal:</span> &nbsp;$2,548.50</p>
                 </div>
                 <div class="d-flex">
-                  <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="cart.html">Expand Cart</a></div>
+                  <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="{{ route('cart.index') }}">Expand Cart</a></div>
                   <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="checkout.html">Checkout</a></div>
                 </div>
               </div>

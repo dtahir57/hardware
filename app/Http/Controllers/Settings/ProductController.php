@@ -83,6 +83,7 @@ class ProductController extends Controller
         } else {
             $product->is_shippable = 0;
         }
+        $product->slug = str_slug($request->name, '-');
         $product->save();
 
         $product_has_quantity = new ProductHasQuantity;
