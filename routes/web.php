@@ -40,6 +40,8 @@ Route::get('/cart/items/flush', 'CartController@flush')->name('cart.flush');
 
 Route::get('/shop/{slug}', 'ShopController@show')->name('category.show');
 
+Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**
 	 * Starting Routes For PermissionController

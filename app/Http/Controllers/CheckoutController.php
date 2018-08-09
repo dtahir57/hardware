@@ -3,6 +3,8 @@
 namespace Hardware\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Hardware\Http\Models\Category;
+use Cart;
 
 class CheckoutController extends Controller
 {
@@ -13,7 +15,9 @@ class CheckoutController extends Controller
      */
     public function index()
     {
-        //
+        $cartItems = Cart::content();
+        $categories = Category::with('childs')->get();
+        return view('checkout.index', compact('categories', 'cartItems'));
     }
 
     /**
