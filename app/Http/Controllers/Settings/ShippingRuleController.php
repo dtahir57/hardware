@@ -18,7 +18,7 @@ class ShippingRuleController extends Controller
      */
     public function index()
     {
-        $shipping_rules = ShippingRule::latest()->get();
+        $shipping_rules = ShippingRule::orderby('priority', 'ASC')->get();
         return view('admin.ShippingRule.index', compact('shipping_rules'));
     }
 
