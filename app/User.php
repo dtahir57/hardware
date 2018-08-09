@@ -5,6 +5,7 @@ namespace Hardware;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Hardware\Http\Models\Order;
 
 class User extends Authenticatable
 {
@@ -27,4 +28,8 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function orders () {
+        return $this->hasMany(Order::class);
+    }
 }

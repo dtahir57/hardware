@@ -11,6 +11,7 @@ use Hardware\Http\Models\Attribute;
 use Hardware\Http\Models\Tag;
 use Hardware\Http\Models\ProductHasImage;
 use Hardware\Http\Models\ProductHasQuantity;
+use Hardware\Http\Models\Order;
 
 class Product extends Model
 {
@@ -43,5 +44,9 @@ class Product extends Model
 
     public function product_has_quantity () {
         return $this->hasOne(ProductHasQuantity::class);
+    }
+
+    public function orders () {
+        return $this->belongsToMany(Order::class);
     }
 }

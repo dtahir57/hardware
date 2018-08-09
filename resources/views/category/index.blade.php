@@ -54,10 +54,10 @@
       	@foreach($category{0}->products as $product)
         <div class="col-md-4 col-sm-6">
           <div class="product-card mb-30">
-            <a class="product-thumb" href="shop-single.html"><img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product"></a>
+            <a class="product-thumb" href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}"><img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product"></a>
             <div class="product-card-body">
-              <div class="product-category"><a href="#">{{ $product->categories{0}->title }}</a></div>
-              <h3 class="product-title"><a href="shop-single.html">{{ $product->title }}</a></h3>
+              <div class="product-category"><a href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}">{{ $product->categories{0}->title }}</a></div>
+              <h3 class="product-title"><a href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}">{{ $product->title }}</a></h3>
               <h4 class="product-price">
                 ${{ $product->product_has_price->plc_hardware_price }}
               </h4>

@@ -3,11 +3,8 @@
 namespace Hardware\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Cart;
-use Hardware\Http\Models\Category;
-use Hardware\Http\Models\Product;
 
-class CartController extends Controller
+class CheckoutController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,9 +13,7 @@ class CartController extends Controller
      */
     public function index()
     {
-        $cartItems = Cart::content();
-        $categories = Category::latest()->get();
-        return view('cart.index', compact('cartItems', 'categories'));
+        //
     }
 
     /**
@@ -50,9 +45,7 @@ class CartController extends Controller
      */
     public function show($id)
     {
-        $product = Product::findOrFail($id);
-        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => 1, 'price' => $product->product_has_price->plc_hardware_price, 'options' => ['image' => $product->product_has_images{0}->img_url]]);
-        return redirect()->back();
+        //
     }
 
     /**
@@ -75,8 +68,7 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        Cart::update($id, $request->qty);
-        return redirect()->back();
+        //
     }
 
     /**
@@ -88,24 +80,5 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
-    }
-
-    public function removeItem($id)
-    {
-        Cart::remove($id);
-        return redirect()->back();
-    }
-
-    public function flush ()
-    {
-        Cart::destroy();
-        return redirect()->back();
-    }
-
-    public function post(Request $request, $id)
-    {
-        $product = Product::findOrFail($id);
-        Cart::add(['id' => $product->id, 'name' => $product->name, 'qty' => $request->qty, 'price' => $product->product_has_price->plc_hardware_price, 'options' => ['image' => $product->product_has_images{0}->img_url]]);
-        return redirect()->back();
     }
 }

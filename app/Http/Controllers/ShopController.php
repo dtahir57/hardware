@@ -94,4 +94,12 @@ class ShopController extends Controller
     {
         //
     }
+
+    public function getSingleProduct($category, $product)
+    {
+        $categories = Category::with('childs')->get();
+        $product = Product::where('slug', $product)->first();
+        $cartItems = Cart::content();
+        return view('shop.single_product', compact('product', 'cartItems', 'categories'));
+    }
 }

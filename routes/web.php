@@ -24,9 +24,13 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/shop', 'ShopController@index')->name('shop.index');
 
+Route::get('/shop/single_product/{category}/{product}', 'ShopController@getSingleProduct')->name('shop.getSingleProduct');
+
 Route::get('/cart', 'CartController@index')->name('cart.index');
 
 Route::get('/cart/{id}', 'CartController@show')->name('cart.show');
+
+Route::post('/cart/{id}', 'CartController@post')->name('cart.post');
 
 Route::get('/cart/item/remove/{id}', 'CartController@removeItem')->name('cart.remove');
 

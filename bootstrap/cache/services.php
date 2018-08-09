@@ -34,6 +34,7 @@
     30 => 'Hardware\\Providers\\EventServiceProvider',
     31 => 'Hardware\\Providers\\RouteServiceProvider',
     32 => 'Spatie\\Permission\\PermissionServiceProvider',
+    33 => 'Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider',
   ),
   'eager' => 
   array (
@@ -56,6 +57,7 @@
     16 => 'Hardware\\Providers\\EventServiceProvider',
     17 => 'Hardware\\Providers\\RouteServiceProvider',
     18 => 'Spatie\\Permission\\PermissionServiceProvider',
+    19 => 'Gloudemans\\Shoppingcart\\ShoppingcartServiceProvider',
   ),
   'deferred' => 
   array (
