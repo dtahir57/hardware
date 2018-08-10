@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Shop')
+@section('title', 'Cart')
 
 @section('content')
 <div class="page-title">
@@ -71,10 +71,37 @@
     </div>
     <div class="column text-lg"><span class="text-muted">Subtotal:&nbsp; </span><span class="text-gray-dark">${{ Cart::subtotal() }}</span></div>
   </div>
+  <div class="column">
+      <a class="btn btn-outline-secondary" href="{{ route('shop.index') }}"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a>
+    </div>
+  <form action="{{ route('checkout.index') }}" method="GET">
+    @csrf
   <div class="shopping-cart-footer">
-    <div class="column"><a class="btn btn-outline-secondary" href="{{ route('shop.index') }}"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a></div>
-    <div class="column"><a class="btn btn-primary" href="{{ route('checkout.index') }}">Checkout</a></div>
+    <div class="row">
+      <h4>Please Choose Payment Method</h4>
+    </div>
+    <div class="row">
+      <div class="form-group col-sm-4">
+        <label class="control-label">
+        <input type="radio" name="payment_method" checked value="paypal" />Paypal
+        </label>
+      </div>
+      <div class="form-group col-sm-4">
+        <label class="control-label">
+        <input type="radio" name="payment_method" value="stripe" />Stripe
+        </label>
+      </div>
+      <div class="form-group col-sm-4">
+        <label class="control-label">
+        <input type="radio" name="payment_method" value="cod" />COD
+        </label>
+      </div>
+    </div>
+    <div class="column">
+      <button class="btn btn-primary" type="submit">Checkout</button>
+    </div>
   </div>
+</form>
   <!-- Related Products Carousel-->
   <h3 class="text-center padding-top-2x mt-2 padding-bottom-1x">You May Also Like</h3>
   <!-- Carousel-->

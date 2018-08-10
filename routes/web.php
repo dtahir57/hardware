@@ -40,7 +40,10 @@ Route::get('/cart/items/flush', 'CartController@flush')->name('cart.flush');
 
 Route::get('/shop/{slug}', 'ShopController@show')->name('category.show');
 
-Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+Route::group(['middleware' => 'auth'], function () {
+	Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
+	Route::post('/checkout/paypal', 'Payment\PaypalController@store')->name('paypal.store');
+});
 
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	/**

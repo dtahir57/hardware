@@ -8,16 +8,35 @@ use Cart;
 
 class CheckoutController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $cartItems = Cart::content();
-        $categories = Category::with('childs')->get();
-        return view('checkout.index', compact('categories', 'cartItems'));
+        if ($request->payment_method == 'paypal') {
+            $cartItems = Cart::content();
+            $categories = Category::with('childs')->get();
+            $payment_method = $request->payment_method;
+            return view('paypal.index', compact('categories', 'cartItems', 'payment_method'));
+        } elseif ($request->payment_method == 'stripe') {
+            $cartItems = Cart::content();
+            $categories = Category::with('childs')->get();
+            $payment_method = $request->payment_method;
+            return view('stripe.index', compact('categories', 'cartItems', 'payment_method'));
+        } elseif ($request->payment_method == 'cod') {
+            $cartItems = Cart::content();
+            $categories = Category::with('childs')->get();
+            $payment_method = $request->payment_method;
+            return view('cod.index', compact('categories', 'cartItems', 'payment_method'));
+        } else {
+            return redirect()->back();
+        }
     }
 
     /**
