@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pay With Paypal')
+@section('title', 'Cash On Delivery')
 
 @section('content')
 <div class="page-title">
@@ -19,7 +19,10 @@
   </div>
 </div>
 <div class="container padding-bottom-3x mb-2">
-  <form action="{{ route('paypal.store') }}" method="POST">
+  @foreach($errors->all() as $error)
+  <li class="alert alert-danger">{{ $error }}</li>
+  @endforeach
+  <form action="{{ route('cod.store') }}" method="POST">
   	@csrf
     <div class="row">
       <!-- Checkout Adress-->

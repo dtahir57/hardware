@@ -376,6 +376,20 @@
 					</a>
 				</li>
 				@endif
+				@if(auth::user()->can('View_Order'))
+				<li>
+					<a class="{{(Request::is('admin/orders')? 'active': '')}}
+							  {{(Request::is('admin/orders/create')? 'active': '')}}
+							  {{(Request::is('admin/orders/order/'.request()->route('order_no'))? 'active': '')}}
+							  {{(Request::is('admin/orders/'.request()->route('order_no').'/edit')? 'active': '')}}" href="{{ route('order.index') }}">
+						<div class="pull-left">
+							<i class="ti-receipt  mr-20"></i>
+							<span class="right-nav-text">Orders</span>
+						</div>
+						<div class="clearfix"></div>
+					</a>
+				</li>
+				@endif
 				@if(auth::user()->can('View_Manufacturer'))
 				<li>
 					<a class="{{(Request::is('admin/manufacturers')? 'active': '')}}

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Pay With Paypal')
+@section('title', 'Pay With Stripe')
 
 @section('content')
 <div class="page-title">
@@ -19,21 +19,25 @@
   </div>
 </div>
 <div class="container padding-bottom-3x mb-2">
-  <form action="{{ route('paypal.store') }}" method="POST">
+  <form action="{{ route('stripe.store') }}" method="POST">
   	@csrf
+  	<input type="hidden" name="payment_method" value="{{ $payment_method }}">
     <div class="row">
       <!-- Checkout Adress-->
       <div class="col-xl-9 col-lg-8">
+        @foreach($errors->all() as $error)
+        <li class="alert alert-danger"></li>
+        @endforeach
         <h4>Shipping Address</h4>
         <hr class="padding-bottom-1x">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-fn">First Name</label>
               <input class="form-control" name="fname" type="text" id="checkout-fn">
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-ln">Last Name</label>
               <input class="form-control" name="lname" type="text" id="checkout-ln">
@@ -41,13 +45,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-email">E-mail Address</label>
               <input class="form-control" name="email" type="email" id="checkout-email">
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-phone">Phone Number</label>
               <input class="form-control" name="phone_number" type="text" id="checkout-phone">
@@ -55,13 +59,13 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-company">Company</label>
               <input class="form-control" name="company" type="text" id="checkout-company">
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-country">Country</label>
               <select class="form-control" name="country" id="checkout-country">
@@ -77,7 +81,7 @@
           </div>
         </div>
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-city">City</label>
               <select class="form-control" name="city" id="checkout-city">
@@ -90,7 +94,7 @@
               </select>
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-zip">ZIP Code</label>
               <input class="form-control" name="zip" type="text" id="checkout-zip">
@@ -98,18 +102,53 @@
           </div>
         </div>
         <div class="row padding-bottom-1x">
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-address1">Address 1</label>
               <input class="form-control" name="address1" type="text" id="checkout-address1">
             </div>
           </div>
-          <div class="col-sm-6">
+          <div class="col-md-6">
             <div class="form-group">
               <label for="checkout-address2">Address 2</label>
               <input class="form-control" name="address2" type="text" id="checkout-address2">
             </div>
           </div>
+        </div>
+        <div class="col-md-12">
+        	<div class="accordion" id="accordion" role="tablist">
+        	  <div class="card">
+        	    <div class="card-header" role="tab">
+        	      <h6><a href="#card" data-toggle="collapse"><i class="icon-credit-card"></i>Pay with Credit Card</a></h6>
+        	    </div>
+        	    <div class="collapse show" id="card" data-parent="#accordion" role="tabpanel">
+        	      <div class="card-body">
+        	        <p>We accept following credit cards:&nbsp;&nbsp;<img class="d-inline-block align-middle" src="{{ asset('frontend/img/credit-cards.png')}}" style="width: 120px;" alt="Cerdit Cards"></p>
+        	        <div class="card-wrapper"></div>
+        	        <form class="interactive-credit-card row">
+        	          <div class="form-group col-sm-6">
+        	            <input class="form-control" type="text" name="number" class="number" id="cardNumber" placeholder="Card Number" required>
+        	          </div>
+        	          <div class="form-group col-sm-6">
+        	            <input class="form-control" type="text" name="name" class="name" placeholder="Full Name" required>
+        	          </div>
+        	          <div class="form-group col-sm-3">
+        	            <input class="form-control" type="text" name="exp_month" class="card-expiry-month" placeholder="Expiry Month" required>
+        	          </div>
+        	          <div class="form-group col-sm-3">
+        	            <input class="form-control" type="text" name="exp_year" class="card-expiry-year" placeholder="Expiry Year" required>
+        	          </div>
+        	          <div class="form-group col-sm-3">
+        	            <input class="form-control" type="text" name="cvc" class="cvc" placeholder="CVC" required>
+        	          </div>
+        	          <div class="col-sm-6">
+        	            <button class="btn btn-outline-primary btn-block mt-0" type="submit">Submit</button>
+        	          </div>
+        	        </form>
+        	      </div>
+        	    </div>
+        	  </div>
+        	</div>
         </div>
         <input type="hidden" name="total_price" value="" />
         <div class="d-flex justify-content-between paddin-top-1x mt-4">
@@ -117,10 +156,6 @@
         		<i class="icon-arrow-left"></i>
         		<span class="hidden-xs-down">&nbsp;Back To Cart</span>
         	</a>
-        	<button class="btn btn-primary" type="submit">
-        		<span class="hidden-xs-down">Continue&nbsp;</span>
-        		<i class="icon-arrow-right"></i>
-        	</button>
         </div>
       </div>
       <input type="hidden" name="payment_method" value="{{ $payment_method }}">

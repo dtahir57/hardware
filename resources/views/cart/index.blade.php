@@ -74,6 +74,7 @@
   <div class="column">
       <a class="btn btn-outline-secondary" href="{{ route('shop.index') }}"><i class="icon-arrow-left"></i>&nbsp;Back to Shopping</a>
     </div>
+  @if(Cart::subtotal() > 0)
   <form action="{{ route('checkout.index') }}" method="GET">
     @csrf
   <div class="shopping-cart-footer">
@@ -102,6 +103,7 @@
     </div>
   </div>
 </form>
+@endif
   <!-- Related Products Carousel-->
   <h3 class="text-center padding-top-2x mt-2 padding-bottom-1x">You May Also Like</h3>
   <!-- Carousel-->

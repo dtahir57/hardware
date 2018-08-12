@@ -119,7 +119,7 @@
               </div>
               <div class="d-flex">
                 <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="{{route('shop.index')}}">Expand Cart</a></div>
-                <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="{{ route('checkout.index') }}">Checkout</a></div>
+                <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="{{ route('cart.index') }}">View Cart</a></div>
               </div>
             </div>
           </div>
@@ -330,7 +330,7 @@
                 </div>
                 <div class="d-flex">
                   <div class="pr-2 w-50"><a class="btn btn-secondary btn-sm btn-block mb-0" href="{{ route('cart.index') }}">Expand Cart</a></div>
-                  <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="{{ route('checkout.index') }}">Checkout</a></div>
+                  <div class="pl-2 w-50"><a class="btn btn-primary btn-sm btn-block mb-0" href="{{ route('cart.index') }}">Cart</a></div>
                 </div>
               </div>
             </div>
@@ -453,5 +453,6 @@
     <!-- JavaScript (jQuery) libraries, plugins and custom scripts-->
     <script src="{{ asset('frontend/js/vendor.min.js') }}"></script>
     <script src="{{ asset('frontend/js/scripts.min.js') }}"></script>
+    @yield('script')
   </body>
 </html>

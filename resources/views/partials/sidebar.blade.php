@@ -11,8 +11,8 @@
     </div>
   </aside>
   <nav class="list-group">
-    <a class="list-group-item with-badge" href="account-orders.html">
-      <i class="icon-shopping-bag"></i>Orders<span class="badge badge-default badge-pill">6</span>
+    <a class="list-group-item {{(Request::is('customer/orders')?'active':'')}} with-badge" href="{{ route('customer.order.index') }}">
+      <i class="icon-shopping-bag"></i>Orders<span class="badge badge-default badge-pill">{{ $orders->count() }}</span>
     </a>
     <a class="list-group-item {{(Request::is('home')?'active':'')}}" href="{{ route('home') }}">
       <i class="icon-user"></i>Profile

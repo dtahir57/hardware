@@ -77,5 +77,9 @@ class PermissionSeeder extends Seeder
         Permission::create(['module' => 'supplier', 'name' => 'Add_Supplier']);
         Permission::create(['module' => 'supplier', 'name' => 'Edit_Supplier']);
         Permission::create(['module' => 'supplier', 'name' => 'Delete_Supplier']);
+
+        Permission::create(['module' => 'order', 'name' => 'View_Order']);
+        Permission::create(['module' => 'order', 'name' => 'Get_Order']);
+        Permission::create(['module' => 'order', 'name' => 'Update_Order']);
     }
 }

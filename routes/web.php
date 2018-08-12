@@ -41,8 +41,12 @@ Route::get('/cart/items/flush', 'CartController@flush')->name('cart.flush');
 Route::get('/shop/{slug}', 'ShopController@show')->name('category.show');
 
 Route::group(['middleware' => 'auth'], function () {
+	Route::get('/customer/orders', 'Customer\OrderController@index')->name('customer.order.index');
 	Route::get('/checkout', 'CheckoutController@index')->name('checkout.index');
 	Route::post('/checkout/paypal', 'Payment\PaypalController@store')->name('paypal.store');
+	Route::get('/status', 'Payment\PaypalController@getPaymentStatus');
+	Route::post('/checkout/stripe', 'Payment\StripeController@store')->name('stripe.store');
+	Route::post('/checkout/cod', 'Payment\CashOnDeliveryController@store')->name('cod.store');
 });
 
 Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
@@ -332,5 +336,22 @@ Route::group(['middleware' => 'auth', 'prefix' => '/admin'], function () {
 	});
 	/**
 	 * Ending Routes For ProductController
+	 */
+	
+	/**
+	 * Starting Routes For OrderController
+	 */
+	Route::group(['middleware' => ['permission:View_Order']], function () {
+		Route::get('orders', 'Settings\OrderController@index')->name('order.index');
+	});
+	Route::group(['middleware' => ['permission:Get_Order']], function () {
+		Route::get('orders/order/{order_no}', 'Settings\OrderController@show')->name('order.show');
+	});
+	Route::group(['middleware' => ['permission:Update_Order']], function () {
+		Route::get('orders/{order_no}/edit', 'Settings\OrderController@edit')->name('order.edit');
+		Route::patch('orders/{order_no}', 'Settings\OrderController@update')->name('order.update');
+	});
+	/**
+	 * Ending Routes For OrderController
 	 */
 });
