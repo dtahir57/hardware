@@ -43,7 +43,7 @@
                   <div class="row">
                     @foreach($categories as $category)
                     <div class="col-sm-3">
-                        <a class="d-block navi-link text-center mb-30" href="#">
+                        <a class="d-block navi-link text-center mb-30" href="{{ route('category.show', $category->slug) }}">
                             <img class="d-block" src="{{ Storage::url($category->thumbnail) }}" alt="Category Image" />
                             <span class="text-gray-dark">{{ $category->title }}</span>
                         </a>
@@ -107,9 +107,9 @@
             <div class="toolbar-dropdown cart-dropdown widget-cart hidden-on-mobile">
               @foreach($cartItems as $cartItem)
               <div class="entry">
-                <div class="entry-thumb"><a href="shop-single.html"><img src="{{ Storage::url($cartItem->options->image) }}" alt="Product"></a></div>
+                <div class="entry-thumb"><a href=""><img src="{{ Storage::url($cartItem->options->image) }}" alt="Product"></a></div>
                 <div class="entry-content">
-                  <h4 class="entry-title"><a href="shop-single.html">{{ $cartItem->name }}</a></h4><span class="entry-meta">{{ $cartItem->qty }} x ${{ $cartItem->price }}</span>
+                  <h4 class="entry-title"><a href="">{{ $cartItem->name }}</a></h4><span class="entry-meta">{{ $cartItem->qty }} x ${{ $cartItem->price }}</span>
                 </div>
                 <div class="entry-delete"><i class="icon-x"></i></div>
               </div>
@@ -196,12 +196,7 @@
         <div class="btn-group categories-btn">
           <button class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"><i class="icon-menu text-lg"></i>&nbsp;Categories</button>
           <div class="dropdown-menu mega-dropdown">
-            <div class="row">
-              <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/01.jpg"><span class="text-gray-dark">Computers &amp; Accessories</span></a></div>
-              <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/02.jpg"><span class="text-gray-dark">Smartphones &amp; Tablets</span></a></div>
-              <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/03.jpg"><span class="text-gray-dark">TV, Video &amp; Audio</span></a></div>
-              <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/04.jpg"><span class="text-gray-dark">Cameras, Photo &amp; Video</span></a></div>
-            </div>
+            
             <div class="row">
               <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/05.jpg"><span class="text-gray-dark">Headphones</span></a></div>
               <div class="col-sm-3"><a class="d-block navi-link text-center mb-30" href="shop-grid-ls.html"><img class="d-block" src="img/shop/header-categories/06.jpg"><span class="text-gray-dark">Wearable Electronics</span></a></div>
@@ -225,26 +220,16 @@
               <ul class="mega-menu">
                 <li><span class="mega-menu-title">Top Categories</span>
                   <ul class="sub-menu">
-                    <li><a href="#">Computers &amp; Accessories</a></li>
-                    <li><a href="#">Smartphones &amp; Tablets</a></li>
-                    <li><a href="#">TV, Video &amp; Audio</a></li>
-                    <li><a href="#">Cameras, Photo &amp; Video</a></li>
-                    <li><a href="#">Headphones</a></li>
-                    <li><a href="#">Wearable Electronics</a></li>
-                    <li><a href="#">Printers &amp; Ink</a></li>
-                    <li><a href="#">Video Games</a></li>
+                    @foreach($top_categories as $category)
+                    <li><a href="{{ route('category.show', $category->slug) }}">{{ $category->title }}</a></li>
+                    @endforeach
                   </ul>
                 </li>
                 <li><span class="mega-menu-title">Popular Brands</span>
                   <ul class="sub-menu">
-                    <li><a href="#">Apple</a></li>
-                    <li><a href="#">Canon Inc.</a></li>
-                    <li><a href="#">Hewlett-Packard</a></li>
-                    <li><a href="#">Lenovo</a></li>
-                    <li><a href="#">Panasonic</a></li>
-                    <li><a href="#">Samsung Electronics</a></li>
-                    <li><a href="#">Sony</a></li>
-                    <li><a href="#">Toshiba</a></li>
+                    @foreach($brands as $brand)
+                    <li><a href="#">{{ $brand->name }}</a></li>
+                    @endforeach
                   </ul>
                 </li>
                 <li><span class="mega-menu-title">Store Locator</span>
@@ -267,43 +252,22 @@
                     </div>
                   </div>
                 </li>
-                <li><a class="card border-0 bg-secondary rounded-0" href="shop-grid-ls.html"><img class="d-block mx-auto" alt="Samsung Galaxy S9" src="img/banners/mega-menu.jpg"></a></li>
+                <li><a class="card border-0 bg-secondary rounded-0" href="{{ route('shop.index') }}"><img class="d-block mx-auto" alt="Samsung Galaxy S9" src="{{ asset('frontend/img/banners/mega-menu.jpg') }}"></a></li>
               </ul>
             </li>
             @if(Auth::check())
             <li class="has-submenu"><a href="account-orders.html">Account</a>
               <ul class="sub-menu">
-                  <li><a href="account-login.html">Login / Register</a></li>
-                  <li><a href="account-password-recovery.html">Password Recovery</a></li>
-                  <li><a href="account-orders.html">Orders List</a></li>
-                  <li><a href="account-wishlist.html">Wishlist</a></li>
-                  <li><a href="account-profile.html">Profile Page</a></li>
-                  <li><a href="account-address.html">Contact / Shipping Address</a></li>
-                  <li><a href="account-tickets.html">My Tickets</a></li>
-                  <li><a href="account-single-ticket.html">Single Ticket</a></li>
+                  <li><a href="">Password Recovery</a></li>
+                  <li><a href="{{ route('customer.order.index') }}">Orders List</a></li>
+                  <li><a href="">Wishlist</a></li>
+                  <li><a href="{{ route('home') }}">Profile Page</a></li>
               </ul>
             </li>
             @endif
-            <li class="has-submenu"><a href="blog-rs.html">Blog</a>
-              <ul class="sub-menu">
-                <li class="has-children"><a href="blog-rs.html">Blog Layout</a>
-                  <ul class="sub-menu">
-                      <li><a href="blog-rs.html">Blog Right Sidebar</a></li>
-                      <li><a href="blog-ls.html">Blog Left Sidebar</a></li>
-                      <li><a href="blog-ns.html">Blog No Sidebar</a></li>
-                  </ul>
-                </li>
-                <li class="has-children"><a href="blog-single-rs.html">Single Post Layout</a>
-                  <ul class="sub-menu">
-                      <li><a href="blog-single-rs.html">Post Right Sidebar</a></li>
-                      <li><a href="blog-single-ls.html">Post Left Sidebar</a></li>
-                      <li><a href="blog-single-ns.html">Post No Sidebar</a></li>
-                  </ul>
-                </li>
-              </ul>
-            </li>
-            <li class="has-submenu"><a href="#">About Us</a></li>
-            <li class="has-megamenu"><a href="components/accordion.html">Contact Us</a></li>
+            <li class="has-submenu"><a href="">Blog</a></li>
+            <li class="has-submenu"><a href="">About Us</a></li>
+            <li class="has-megamenu"><a href="">Contact Us</a></li>
           </ul>
         </nav>
         <!-- Toolbar ( Put toolbar here only if you enable sticky navbar )-->
@@ -350,22 +314,9 @@
               <div class="row">
                 <div class="col-md-6">
                   <ul>
-                    <li><a href="#">Computers &amp; Accessories</a></li>
-                    <li><a href="#">Smartphones &amp; Tablets</a></li>
-                    <li><a href="#">TV, Video &amp; Audio</a></li>
-                    <li><a href="#">Cameras, Photo &amp; Video</a></li>
-                    <li><a href="#">Headphones</a></li>
-                    <li><a href="#">Wearable Electronics</a></li>
-                  </ul>
-                </div>
-                <div class="col-md-6">
-                  <ul>
-                    <li><a href="#">Printers &amp; Ink</a></li>
-                    <li><a href="#">Video Games</a></li>
-                    <li><a href="#">Car Electronics</a></li>
-                    <li><a href="#">Smart Home, IoT</a></li>
-                    <li><a href="#">Musical Instruments</a></li>
-                    <li><a href="#">Software</a></li>
+                    @foreach($categories as $category)
+                    <li><a href="{{ route('category.show', $category->slug) }}">{{ $category->title }}</a></li>
+                    @endforeach
                   </ul>
                 </div>
               </div>
@@ -444,7 +395,7 @@
           </div>
         </div>
         <!-- Copyright-->
-        <p class="footer-copyright">© All rights reserved. Made with &nbsp;<i class="icon-heart text-danger"></i><a href="http://rokaux.com/" target="_blank"> &nbsp;by rokaux</a></p>
+        <p class="footer-copyright">© All rights reserved.</p>
       </div>
     </footer>
     <!-- Back To Top Button--><a class="scroll-to-top-btn" href="#"><i class="icon-chevron-up"></i></a>

@@ -50,6 +50,7 @@ class CashOnDeliveryController extends Controller
         $order->phone_number = $request->phone_number;
         $order->company = $request->company;
         $order->country = $request->country;
+        $order->payment_status = 'pending';
         $order->city = $request->city;
         $order->zip = $request->zip;
         $order->address1 = $request->address1;

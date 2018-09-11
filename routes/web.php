@@ -15,7 +15,10 @@ Route::get('/', function () {
 	$cartItems = Cart::content();
 	$categories = Hardware\Http\Models\Category::where('is_active', 1)->get();
 	$featured = Hardware\Http\Models\Product::where('is_featured', 1)->get();
-    return view('welcome', compact('categories', 'featured', 'cartItems'));
+	$top_categories = Hardware\Http\Models\Category::orderBy('id', 'desc')->take(5)->get();
+	$brands = Hardware\Http\Models\Manufacturer::orderBy('id', 'desc')->take(5)->get();
+	$products = Hardware\Http\Models\Product::orderBy('id', 'desc')->take(3)->get();
+    return view('welcome', compact('categories', 'featured', 'cartItems', 'top_categories', 'brands', 'products'));
 });
 
 Auth::routes();

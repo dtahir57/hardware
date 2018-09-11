@@ -49,7 +49,34 @@
           <div class="shop-view"><a class="grid-view active" href="shop-grid-ls.html"><span></span><span></span><span></span></a><a class="list-view" href="shop-list-ls.html"><span></span><span></span><span></span></a></div>
         </div>
       </div>
+      <div class="row">
+        @if($single_category->childs->count() > 0)
+        <h3>{{ $single_category->title }} Sub Categories</h3>
+        
+        @endif
+      </div>
+      <div class="row">
+        @if($single_category->childs->count() > 0)
+          @foreach($single_category->childs as $sub)
+          <div class="col-md-3">
+            <div class="product-card mb-30">
+              <a class="product-thumb" href="{{ route('category.show', $sub->slug) }}">
+                <img src="{{ Storage::url($sub->thumbnail) }}" alt="Category">
+              </a>
+              <div class="product-card-body">
+                <h3 class="product-title">
+                  <a href="{{ route('category.show', $sub->slug) }}">{{ $sub->title }}</a>
+                </h3>
+              </div>
+            </div>
+          </div>
+          @endforeach
+        @endif
+      </div>
+      <hr>
+      <br>
       <!-- Products Grid-->
+      <h3>Products</h3>
       <div class="row">
       	@foreach($category{0}->products as $product)
         <div class="col-md-4 col-sm-6">
@@ -104,23 +131,7 @@
           <h3 class="widget-title">Shop Categories</h3>
           @foreach($categories as $category)
           <ul>
-            <li @if($category->childs->count() > 0) class="has-children" @endif><a @if($category->childs->count() > 0) href="#" @else href="{{ route('category.show', $category->slug) }}" @endif>{{ $category->title }}</a>
-                @if($category->childs)
-                  <ul>
-                    @foreach($category->childs as $sub)
-                    <li><a @if($sub->childs->count() > 0) href="#" @else href="{{ route('category.show', $sub->slug) }}" @endif>{{ $sub->title }}</a>
-                    @if($sub->childs)
-                      @foreach($sub->childs as $child_lvl_2)
-                      <ul>
-                        <li><a href="{{ route('category.show', $child_lvl_2->slug) }}">{{ $child_lvl_2->title }}</a></li>
-                      </ul>
-                      @endforeach
-                    @endif
-                    </li>
-                    @endforeach
-                  </ul>
-                @endif
-            </li>
+            <li><a href="{{ route('category.show', $category->slug) }}">{{ $category->title }}</a></li>
           </ul>
           @endforeach
         </section>

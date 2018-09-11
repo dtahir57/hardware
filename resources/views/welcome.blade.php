@@ -14,7 +14,7 @@
                 <div class="from-bottom"><img class="d-inline-block w-150 mb-4" src="{{ asset('frontend/img/hero-slider/logo02.png') }}" alt="Puma">
                   <div class="h2 text-body mb-2 pt-1">Google Home - Smart Speaker</div>
                   <div class="h2 text-body mb-4 pb-1">starting at <span class="text-medium">$129.00</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-grid-ls.html">View Offers&nbsp;<i class="icon-arrow-right"></i></a>
+                </div><a class="btn btn-primary scale-up delay-1" href="{{ route('shop.index') }}">View Offers&nbsp;<i class="icon-arrow-right"></i></a>
               </div>
               <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="{{ asset('frontend/img/hero-slider/02.png') }}" alt="Puma Backpack"></div>
             </div>
@@ -27,7 +27,7 @@
                 <div class="from-bottom"><img class="d-inline-block w-150 mb-3" src="{{ asset('frontend/img/hero-slider/logo01.png')}}" alt="Sony">
                   <div class="h2 text-body mb-2 pt-1">Modern Powerful Laptop</div>
                   <div class="h2 text-body mb-4 pb-1">for only <span class="text-medium">$1,459.99</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now&nbsp;<i class="icon-arrow-right"></i></a>
+                </div><a class="btn btn-primary scale-up delay-1" href="{{ route('shop.index') }}">Shop Now&nbsp;<i class="icon-arrow-right"></i></a>
               </div>
               <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="{{ asset('frontend/img/hero-slider/01.png')}}" alt="Chuck Taylor All Star II"></div>
             </div>
@@ -40,7 +40,7 @@
                 <div class="from-bottom"><img class="d-inline-block w-150 mb-3" src="{{ asset('frontend/img/hero-slider/logo03.png')}}" alt="Motorola">
                   <div class="h2 text-body mb-2 pt-1">Beats Studio by Dr.Dre</div>
                   <div class="h2 text-body mb-4 pb-1">for only <span class="text-medium">$349.50</span></div>
-                </div><a class="btn btn-primary scale-up delay-1" href="shop-single.html">Shop Now&nbsp;<i class="icon-arrow-right"></i></a>
+                </div><a class="btn btn-primary scale-up delay-1" href="{{ route('shop.index') }}">Shop Now&nbsp;<i class="icon-arrow-right"></i></a>
               </div>
               <div class="col-md-6 padding-bottom-2x mb-3"><img class="d-block mx-auto" src="{{ asset('frontend/img/hero-slider/03.png')}}" alt="Moto 360"></div>
             </div>
@@ -93,12 +93,12 @@
         @foreach($featured as $product)
         <div class="col-lg-3 col-md-4 col-sm-6">
           <div class="product-card mb-30">
-            <a class="product-thumb" href=""><img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product"></a>
+            <a class="product-thumb" href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}"><img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product"></a>
             <div class="product-card-body">
-              <div class="product-category"><a href="#">{{ $product->categories{0}->title }}</a></div>
-              <h3 class="product-title"><a href="shop-single.html">{{ $product->name }}</a></h3>
+              <div class="product-category"><a href="{{ route('category.show', $product->categories{0}->slug) }}">{{ $product->categories{0}->title }}</a></div>
+              <h3 class="product-title"><a href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}">{{ $product->name }}</a></h3>
               <h4 class="product-price">
-                {{ $product->product_has_price->plc_hardware_price }}
+                $ {{ $product->product_has_price->plc_hardware_price }}
               </h4>
             </div>
             <div class="product-button-group"><a class="product-button btn-wishlist" href="#"><i class="icon-heart"></i><span>Wishlist</span></a><a class="product-button btn-compare" href="#"><i class="icon-repeat"></i><span>Compare</span></a><a class="product-button" href="{{ route('cart.show', $product->id) }}"><i class="icon-shopping-cart"></i><span>To Cart</span></a></div>
@@ -165,26 +165,22 @@
           <div class="widget widget-featured-products">
             <h3 class="widget-title">New Arrivals</h3>
             <!-- Entry-->
+            @foreach($products as $product)
             <div class="entry pb-2">
-              <div class="entry-thumb"><a href="shop-single.html"><img src="{{ asset('frontend/img/shop/widget/05.jpg')}}" alt="Product"></a></div>
+              <div class="entry-thumb">
+                <a href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}">
+                  <img src="{{ Storage::url($product->product_has_images{0}->img_url) }}" alt="Product">
+                </a>
+              </div>
               <div class="entry-content">
-                <h4 class="entry-title"><a href="shop-single.html">iPhone X 256 GB Space Gray</a></h4><span class="entry-meta">$1,450.00</span>
+                <h4 class="entry-title">
+                  <a href="{{ url('/shop/single_product/'.$product->categories{0}->slug.'/'.$product->slug) }}">{{ $product->name }}</a>
+                </h4>
+                <span class="entry-meta">$ {{ $product->product_has_price->web_price }}</span>
               </div>
             </div>
-            <!-- Entry-->
-            <div class="entry">
-              <div class="entry-thumb"><a href="shop-single.html"><img src="{{ asset('frontend/img/shop/widget/04.jpg')}}" alt="Product"></a></div>
-              <div class="entry-content">
-                <h4 class="entry-title"><a href="shop-single.html">Canon EOS M50 Mirrorless Camera</a></h4><span class="entry-meta">$910.00</span>
-              </div>
-            </div>
-            <!-- Entry-->
-            <div class="entry">
-              <div class="entry-thumb"><a href="shop-single.html"><img src="{{ asset('frontend/img/shop/widget/07.jpg')}}" alt="Product"></a></div>
-              <div class="entry-content">
-                <h4 class="entry-title"><a href="shop-single.html">Microsoft Xbox One S</a></h4><span class="entry-meta">$298.99</span>
-              </div>
-            </div><a class="btn btn-outline-secondary btn-sm mb-0" href="shop-grid-ls.html">View More</a>
+            @endforeach
+            <a class="btn btn-outline-secondary btn-sm mb-0" href="{{ route('shop.index') }}">View More</a>
           </div>
         </div>
         <div class="col-md-4 col-sm-6">
@@ -219,7 +215,11 @@
     <section class="bg-secondary padding-top-3x padding-bottom-3x">
       <div class="container">
         <h2 class="h3 text-center mb-30 pb-3">Popular Brands</h2>
-        <div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: false, &quot;loop&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2}, &quot;470&quot;:{&quot;items&quot;:3},&quot;630&quot;:{&quot;items&quot;:4},&quot;991&quot;:{&quot;items&quot;:5},&quot;1200&quot;:{&quot;items&quot;:6}} }"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/01.png" alt="IBM"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/02.png" alt="Sony"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/03.png" alt="HP"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/04.png" alt="Canon"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/05.png" alt="Bosh"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/06.png" alt="Dell"><img class="d-block w-110 opacity-75 m-auto" src="img/brands/07.png" alt="Samsung"></div>
+        <div class="owl-carousel" data-owl-carousel="{ &quot;nav&quot;: false, &quot;dots&quot;: false, &quot;loop&quot;: true, &quot;autoplay&quot;: true, &quot;autoplayTimeout&quot;: 4000, &quot;responsive&quot;: {&quot;0&quot;:{&quot;items&quot;:2}, &quot;470&quot;:{&quot;items&quot;:3},&quot;630&quot;:{&quot;items&quot;:4},&quot;991&quot;:{&quot;items&quot;:5},&quot;1200&quot;:{&quot;items&quot;:6}} }">
+          @foreach($brands as $brand)
+          <img class="d-block w-110 opacity-75 m-auto" src="{{ Storage::url($brand->image) }}" alt="{{ $brand->name }}">
+          @endforeach
+        </div>
       </div>
     </section>
     <!-- Services-->

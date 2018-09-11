@@ -11,6 +11,7 @@ use Auth;
 
 class OrderController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *

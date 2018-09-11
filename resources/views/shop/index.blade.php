@@ -51,6 +51,8 @@
       </div>
       <!-- Products Grid-->
       <div class="row">
+      </div>
+      <div class="row">
       	@foreach($products as $product)
         <div class="col-md-4 col-sm-6">
           <div class="product-card mb-30">
@@ -104,23 +106,7 @@
           <h3 class="widget-title">Shop Categories</h3>
           @foreach($categories as $category)
           <ul>
-            <li @if($category->childs->count() > 0) class="has-children" @endif><a @if($category->childs->count() > 0) href="#" @else href="{{ route('category.show', $category->slug) }}" @endif>{{ $category->title }}</a>
-                @if($category->childs)
-                  <ul>
-                    @foreach($category->childs as $sub)
-                    <li><a @if($sub->childs->count() > 0) href="#" @else href="{{ route('category.show', $sub->slug) }}" @endif>{{ $sub->title }}</a>
-                    @if($sub->childs)
-                      @foreach($sub->childs as $child_lvl_2)
-                      <ul>
-                        <li><a href="{{ route('category.show', $child_lvl_2->slug) }}">{{ $child_lvl_2->title }}</a></li>
-                      </ul>
-                      @endforeach
-                    @endif
-                    </li>
-                    @endforeach
-                  </ul>
-                @endif
-            </li>
+            <li><a href="{{ route('category.show', $category->slug) }}">{{ $category->title }}</a></li>
           </ul>
           @endforeach
         </section>

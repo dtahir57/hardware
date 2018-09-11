@@ -57,8 +57,9 @@ class ShopController extends Controller
         $categories = Category::with('childs')->get();
         $category = Category::with('products')->where('slug',$slug)->get();
         $cartItems = Cart::content();
-        // dd($category{0}->products);
-        return view('category.index', compact('category', 'manufacturers', 'categories', 'cartItems'));
+        $single_category = Category::where('slug', $slug)->first();
+        // dd($single_category->childs{0}->title);
+        return view('category.index', compact('category', 'manufacturers', 'categories', 'cartItems', 'single_category'));
     }
 
     /**

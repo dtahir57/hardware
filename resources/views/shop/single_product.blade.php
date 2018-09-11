@@ -57,16 +57,16 @@
       <span class="h3 d-block">$ {{ $product->product_has_price->plc_hardware_price }}</span>
       <p class="text-muted">{{ $product->long_description }}</p>
       <div class="row margin-top-1x">
-      	{{--@if($product->product_has_attributes)
-      	      	      	@foreach($product->product_has_attributes as $attribute)
-      	      	        <div class="col-sm-6">
-      	      	          <div class="form-group">
-      	      	            <label for="{{ $attribute->label }}">{{ $attribute->label }}</label>
-      	      	            <{{$attribute->type}}></{{$attribute->type}}>
-      	      	          </div>
-      	      	        </div>
-      	      	        @endforeach
-      	      	        @endif--}}
+      	@if($product->product_has_attributes)
+      	@foreach($product->product_has_attributes as $attribute)
+        <div class="col-sm-6">
+          <div class="form-group">
+            <label for="{{ $attribute->label }}">{{ $attribute->label }}</label>
+            <{{$attribute->type}}></{{$attribute->type}}>
+          </div>
+        </div>
+        @endforeach
+        @endif
         <div class="col-sm-6">
           <div class="form-group">
             <label for="color">Battery capacity</label>

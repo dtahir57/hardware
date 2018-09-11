@@ -6,6 +6,7 @@ use Hardware\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Hardware\Http\Models\Category;
 use Cart;
+use Hardware\Http\Models\Manufacturer;
 
 class LoginController extends Controller
 {
@@ -43,6 +44,8 @@ class LoginController extends Controller
     {
         $cartItems = Cart::content();
         $categories = Category::where('is_active', 1)->get();
-        return view('auth.login', compact('categories', 'cartItems'));
+        $top_categories = Category::orderBy('id', 'desc')->take(5)->get();
+        $brands = Manufacturer::orderBy('id', 'desc')->take(5)->get();
+        return view('auth.login', compact('categories', 'cartItems', 'top_categories', 'brands'));
     }
 }
